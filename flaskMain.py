@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from Moviedb import db, MovieModel
+from userDB import userdb, UserModel
 
 app = Flask(__name__)
 
@@ -9,6 +10,7 @@ db.init_app(app)
 
 @app.before_first_request
 def create_table():
+    userdb.create_all()
     db.create_all()
 
 @app.route('/')
