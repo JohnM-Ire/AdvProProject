@@ -20,6 +20,7 @@ def homePage():
     return render_template('homePage.html')
 
 
+
 #to take the user input and post the details to our database
 @app.route('/data/addData', methods= ['GET', 'POST'])
 def addDetails():
@@ -35,13 +36,21 @@ def addDetails():
         movie = MovieModel(id=id, movie_id=movie_id, movie_name=movie_name, relyear=relyear, description=description)
         db.session.add(movie)
         db.session.commit()
-        return redirect('/data')
+        return redirect('/datalist')
 
-@app.route('/data')
+@app.route('/datalist')
 def RetrieveDataList():
     movies = MovieModel.query.all()
     return render_template('datalist.html' , movies = movies)
 
+
+
+@app.route('/data/<int:movie_id>')
+def RetrieveSingleReview(movie_id):
+    movie = MovieModel.query.filter_by(movie_id=movie_id).first()
+    if movie:
+        return render_template('data.html', movie = movie)
+    return f"No Movie review with id {id} in Reviews"
 
 if __name__ =='__main__':
     app.run(debug = True)
