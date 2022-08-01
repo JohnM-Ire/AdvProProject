@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>ADDPAGE</title>
 </head>
 <body>
 <h2><a href="/home">Home</a></h2>
+<p>Enter the movie details and your review below</p>
   <form action='' method = "POST">
-  <p>Record ID<input type = "text" name = "id" /></p>
-  <p>Movie Id <input type = "text" name = "movie_id" /></p>
-  <p>Add the movie title<input type = "text" name = "movie_name" /></p>
-  <p>The Year of Release <input type = "text" name = "relyear" />
-  <p>Add your Review <input type = "text" name = "description" /></p>
+      <table>
+          <tr><td>Record ID</td><td><input type = "text" name = "id"></td></tr>
+          <tr><td>Movie Id</td><td><input type = "text" name = "movie_id"></td></tr>
+          <tr><td>Add the movie title</td><td><input type = "text" name = "movie_name"></td></tr>
+          <tr><td>The Year of Release</td><td><input type = "text" name = "relyear"></td></tr>
 
-  <p><input type = "submit" value = "Submit" /></p>
+          <tr><td>Review:</td></tr><tr><td><textarea rows="10" cols="40" name = "description">Enter You Review here</textarea></td></tr>
+          <tr><td><input type = "submit" value = "Submit Review"></td></tr>
+      </table>
 </form>
 </body>
 </html>

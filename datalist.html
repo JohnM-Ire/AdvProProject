@@ -7,17 +7,10 @@
 <body>
 <h2><a href="/home">Home</a></h2>
 <h1>The reviews</h1>
-{% for movie in movies %}
-<p>Id</p>
-<p>{{movie.id}}</p><hr>
-<p>Movie ID</p>
-<p>{{movie.movie_id}}</p><hr>
 <p>Movie Name</p>
-<p>{{movie.movie_name}}</p><hr>
-<p>Release Year</p>
-<p>{{movie.relyear}}</p><hr>
-<p>Review</p>
-<p>{{movie.description}}</p><hr>
+{% for movie in movies %}
+<p><a href="/data/{{movie.movie_id}}">{{movie.movie_name}} ({{movie.relyear}})</a></p>
+<hr>
 {% endfor %}
 </body>
 </html>

@@ -5,7 +5,7 @@ db = SQLAlchemy()
 class MovieModel(db.Model):
     __tablename__ = "table"
 
-    id = db.Column(db.Integer, primary_key= True)
+    id = db.Column(db.Integer, primary_key= True, unique = True)
     movie_id = db.Column(db.Integer(), unique = True)
     movie_name = db.Column(db.String())
     relyear = db.Column(db.Integer())
