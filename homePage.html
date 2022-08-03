@@ -25,7 +25,10 @@
 <body style="height: 100%; padding: 20px;">
 <div style=" width; 100%; height:Auto; background-color:#a2b9bc; ; text-align:center;">
     <h1>Home</h1>
-    <h2>Welcome to the Movie Review Vault</h2>
+    {% for user in users %}
+        <h2>Welcome to the Movie Review Vault {{user.username}}</h2>
+        <h2>Your password is {{user.password}}</h2>
+    {% endfor %}
 </div>
 <div style="width:50%; float: left; background-color:#b2ad7f; text-align:center;">
     <p>Follow the links below to add your review or view the reviews left by other users.</p>

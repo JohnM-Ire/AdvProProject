@@ -17,9 +17,25 @@ def create_table():
 def landPage():
     return render_template('landingPage.html')
 
+
+@app.route('/signUp', methods= ['GET', 'POST'])
+def signUp():
+    if request.method == 'GET':
+        return render_template('signUp.html')
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        user = UserModel(username=username, password=password)
+        userdb.session.add(user)
+        userdb.session.commit()
+        return redirect('/home')
+
 @app.route('/home')
 def homePage():
-    return render_template('homePage.html')
+    users = UserModel.query.all()
+    return render_template('homePage.html', users= users)
 
 
 
