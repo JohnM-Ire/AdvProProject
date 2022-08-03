@@ -13,8 +13,24 @@ def create_table():
     userdb.create_all()
     db.create_all()
 
-@app.route('/')
+@app.route('/', methods= ['POST', 'GET'])
 def landPage():
+
+    if request.method =="POST":
+
+        username=request.form.get("username")
+        password=request.form.get("password")
+
+        usernameEntry = userdb.execute("SELECT username FROM usertable"
+                                       "WHERE username=:username",{"username":username}).fetchone()
+        passwordEntry = userdb.execute("SELECT password FROM usertable"
+                                       "WHERE username=:username",{"username":username}).fetchone()
+
+        if usernameEntry == username and passwordEntry == password:
+            session['username']= username
+            return redirect('/home')
+        else:
+            return redirect('/')
     return render_template('landingPage.html')
 
 
