@@ -86,5 +86,16 @@ def RetrieveSingleReview(movie_id):
         return render_template('data.html', movie = movie)
     return f"No Movie review with id {id} in Reviews"
 
+@app.route('/delete/<int:movie_id>', methods=['GET', 'POST'])
+def DeleteSingleReview(movie_id):
+    movie = MovieModel.query.filter_by(movie_id=movie_id).first()
+    if request.method == 'POST':
+        if movie:
+            db.session.delete(movie)
+            db.session.commit()
+            return redirect('/datalist')
+
+    return render_template('deleteMovie.html', movie = movie)
+
 if __name__ =='__main__':
     app.run(debug = True)
