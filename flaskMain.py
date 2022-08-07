@@ -70,12 +70,12 @@ def addDetails():
         movie = MovieModel(id=id, movie_id=movie_id, movie_name=movie_name, relyear=relyear, description=description)
         db.session.add(movie)
         db.session.commit()
-        return redirect('/datalist')
+        return redirect('/reviewlist')
 
-@app.route('/datalist')
-def RetrieveDataList():
+@app.route('/reviewlist')
+def RetrieveReviewList():
     movies = MovieModel.query.all()
-    return render_template('datalist.html' , movies = movies)
+    return render_template('reviewlist.html' , movies = movies)
 
 
 
@@ -93,7 +93,7 @@ def DeleteSingleReview(movie_id):
         if movie:
             db.session.delete(movie)
             db.session.commit()
-            return redirect('/datalist')
+            return redirect('/reviewlist')
 
     return render_template('deleteMovie.html', movie = movie)
 
