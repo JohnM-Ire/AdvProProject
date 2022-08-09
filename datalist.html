@@ -8,9 +8,12 @@
 <h2><a href="/home">Home</a></h2>
 <h1>The reviews</h1>
 <p>Movie Name</p>
+<p>Select a movie title to read the review</p>
 {% for movie in movies %}
 <p><a href="/data/{{movie.movie_id}}">{{movie.movie_name}} ({{movie.relyear}})</a></p>
 <hr>
 {% endfor %}
+    <a href="/data/addData"><button type="button" name="addButton">Add Review</button></a>
+
 </body>
 </html>

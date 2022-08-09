@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
+from flask_sqlalchemy import SQLAlchemy
 from Moviedb import db, MovieModel
 from userDB import userdb, UserModel
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = "JohnKey"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jMovie.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
@@ -15,27 +16,34 @@ def create_table():
 
 @app.route('/', methods= ['POST', 'GET'])
 def landPage():
+    return render_template('landingPage.html')
 
     if request.method =="POST":
 
         username=request.form.get("username")
         password=request.form.get("password")
 
-        usernameEntry = userdb.execute("SELECT username FROM usertable"
-                                       "WHERE username=:username",{"username":username}).fetchone()
-        passwordEntry = userdb.execute("SELECT password FROM usertable"
-                                       "WHERE username=:username",{"username":username}).fetchone()
+        user = user.query.filter_by(username=username).first()
 
-        if usernameEntry == username and passwordEntry == password:
-            session['username']= username
-            return redirect('/home')
-        else:
-            return redirect('/')
-    return render_template('landingPage.html')
+        # usernameEntry = userdb.execute("SELECT username FROM usertable"
+        #                                "WHERE username=:username",{"username":username}).fetchone()
+        # passwordEntry = userdb.execute("SELECT password FROM usertable"
+        #                                "WHERE username=:username",{"username":username}).fetchone()
 
+    #     if usernameEntry == username and passwordEntry == password:
+    #         session['username']= username
+    #         return redirect('/home')
+    #     else:
+    #         return redirect('/')
+    # return render_template('landingPage.html')
+        if not user or not (user.password == password):
+            return redirect('/signUp')
+
+        return redirect('/home')
 
 @app.route('/signUp', methods= ['GET', 'POST'])
 def signUp():
+
     if request.method == 'GET':
         return render_template('signUp.html')
 
@@ -66,8 +74,10 @@ def addDetails():
         movie_id = request.form['movie_id']
         movie_name = request.form['movie_name']
         relyear = request.form['relyear']
+        # genre = request.form['genre']
         description = request.form['description']
         movie = MovieModel(id=id, movie_id=movie_id, movie_name=movie_name, relyear=relyear, description=description)
+
         db.session.add(movie)
         db.session.commit()
         return redirect('/reviewlist')
