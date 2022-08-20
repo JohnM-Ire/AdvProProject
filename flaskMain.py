@@ -148,11 +148,12 @@ for details in soup.find_all("div", {"class": "nsp-details"}):
 linkList= []
 for link in soup.findAll("div", {"class": "nsp-poster"}):
     linkText = link.find('a')['href']
+
     linkList.append(linkText)
 
 @app.route('/Lighthouse')
 def lighthouseScrape():
-    return render_template("scrape.html", titleList = titleList, descList = descList, detailsList = detailsList, zip = zip)
+    return render_template("scrape.html", titleList = titleList, descList = descList, detailsList = detailsList, linkList = linkList, zip = zip)
 
 if __name__ =='__main__':
     app.run(debug = True)
