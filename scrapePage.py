@@ -24,6 +24,7 @@ for link in soup.findAll("div", {"class": "nsp-poster"}):
     linkText = link.find('a')['href']
     linkList.append(linkText)
 print(linkList)
+print(len(linkList))
 
 
 descList = []
