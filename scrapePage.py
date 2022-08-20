@@ -1,5 +1,6 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import itertools
 
 url = 'https://www.lighthousecinema.ie/films/'
 html = urlopen(url).read()
@@ -39,18 +40,19 @@ for d in descList:
 #     #print(day)
 #     daylist.append(day.replace("\n", "  "))
 # print(daylist)
-
+detailsList=[]
 for details in soup.find_all("div", {"class": "nsp-details"}):
-    print(" ", details.text)
+    details = details.text
+    detailsList.append(details)
+dlnum = 1
+for dl in detailsList:
+    print(dlnum, ": ", dl)
+    dlnum +=1
+
 # # genre = soup.find("strong")
 # # print(genre.string)
 # desc = soup.findAll("div", {"class": "nsp-description"})
 # print(desc.string)
 
-#li_newBall_luckyStar = soup.findAll('h3', ['nsp-description','new lucky-star'])
-#
-# numbers = []
-# for i in li_newBall_luckyStar:
-#     numbers.append(i.text)
-#
-# print(numbers)
+for (movTitle, movDetails, movDesc) in zip(titleList, detailsList, descList ):
+    print(f"Title: {movTitle}\n{movDetails}\nMovie Description: {movDesc}")
