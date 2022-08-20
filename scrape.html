@@ -8,13 +8,12 @@
 <table>
         <tr>
                 <th>Movie Title</th>
-                <th>Details</th>
                 <th>Description</th>
         </tr>
         {% for (movTitle, movDetails, movDesc) in zip(titleList, detailsList, descList) %}
                 <tr>
-                        <td>{{ movTitle }}</td>
-                        <td>{{ movDetails }}</td>
+                        <td><h2>{{ movTitle }}</h2> <br>
+                        {{ movDetails }}</td>
                         <td>{{ movDesc }}</td>
                 </tr>
         {% endfor %}
