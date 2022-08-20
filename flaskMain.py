@@ -144,6 +144,11 @@ detailsList=[]
 for details in soup.find_all("div", {"class": "nsp-details"}):
     details = details.text
     detailsList.append(details)
+#scrape the link to the movies description page on Lighthouse.ie
+linkList= []
+for link in soup.findAll("div", {"class": "nsp-poster"}):
+    linkText = link.find('a')['href']
+    linkList.append(linkText)
 
 @app.route('/Lighthouse')
 def lighthouseScrape():
