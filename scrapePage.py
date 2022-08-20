@@ -19,6 +19,11 @@ for t in titleList:
     tnum = tnum+1
 
 #print(titleList)
+linkList= []
+for link in soup.findAll("div", {"class": "nsp-poster"}):
+    linkText = link.find('a')['href']
+    linkList.append(linkText)
+print(linkList)
 
 
 descList = []
@@ -27,7 +32,7 @@ for desc in soup.findAll("div", {"class": "nsp-description"}):
     descList.append(desc.replace("\n", ""))
 num = 1;
 for d in descList:
-    print(num, ": ", d)
+    #print(num, ": ", d)
     num = num+1
 #print(descList)
 # print(len(descList))
@@ -46,7 +51,7 @@ for details in soup.find_all("div", {"class": "nsp-details"}):
     detailsList.append(details)
 dlnum = 1
 for dl in detailsList:
-    print(dlnum, ": ", dl)
+    #print(dlnum, ": ", dl)
     dlnum +=1
 
 # # genre = soup.find("strong")
@@ -54,5 +59,5 @@ for dl in detailsList:
 # desc = soup.findAll("div", {"class": "nsp-description"})
 # print(desc.string)
 
-for (movTitle, movDetails, movDesc) in zip(titleList, detailsList, descList ):
-    print(f"Title: {movTitle}\n{movDetails}\nMovie Description: {movDesc}")
+# for (movTitle, movDetails, movDesc) in zip(titleList, detailsList, descList ):
+#     print(f"Title: {movTitle}\n{movDetails}\nMovie Description: {movDesc}")
