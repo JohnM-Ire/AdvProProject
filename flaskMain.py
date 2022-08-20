@@ -1,7 +1,11 @@
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from Moviedb import db, MovieModel
 from userDB import userdb, UserModel
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+import itertools
+import jinja2
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "JohnKey"
@@ -13,6 +17,19 @@ db.init_app(app)
 def create_table():
     userdb.create_all()
     db.create_all()
+
+@app.route('/')
+# #Alt Login method to see if this works better
+# @app.route('/login', methods= ['POST'])
+# def login():
+#     if request.form['password'] == 'password' and request.form['username'] == 'admin':
+#         session['logged_in'] = True
+#
+#     else:
+#         flash('incorrect password entered')
+#         return login()
+
+
 
 @app.route('/', methods= ['POST', 'GET'])
 def landPage():
@@ -106,6 +123,31 @@ def DeleteSingleReview(movie_id):
             return redirect('/reviewlist')
 
     return render_template('deleteMovie.html', movie = movie)
+
+#Code to scrape LightHouse and create 3 lists with Title, Description and Details:
+
+url = 'https://www.lighthousecinema.ie/films/'
+html = urlopen(url).read()
+soup = BeautifulSoup(html, features='html.parser')
+#scrape movie titles
+titleList = []
+for title in soup.find_all("h3"):
+    title = title.string
+    titleList.append(title)
+# scrape description
+descList = []
+for desc in soup.findAll("div", {"class": "nsp-description"}):
+    desc = desc.string
+    descList.append(desc.replace("\n", ""))
+# scrape details
+detailsList=[]
+for details in soup.find_all("div", {"class": "nsp-details"}):
+    details = details.text
+    detailsList.append(details)
+
+@app.route('/Lighthouse')
+def lighthouseScrape():
+    return render_template("scrape.html", titleList = titleList, descList = descList, detailsList = detailsList, zip = zip)
 
 if __name__ =='__main__':
     app.run(debug = True)

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LightHouse Events</title>
+</head>
+<body>
+<table>
+        <tr>
+                <th>Movie Title</th>
+                <th>Details</th>
+                <th>Description</th>
+        </tr>
+        {% for (movTitle, movDetails, movDesc) in zip(titleList, detailsList, descList) %}
+                <tr>
+                        <td>{{ movTitle }}</td>
+                        <td>{{ movDetails }}</td>
+                        <td>{{ movDesc }}</td>
+                </tr>
+        {% endfor %}
+</table>
+
+</body>
+</html>
