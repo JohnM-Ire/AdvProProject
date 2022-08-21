@@ -52,12 +52,15 @@ for d in descList:
 # print(daylist)
 detailsList=[]
 for details in soup.find_all("div", {"class": "nsp-details"}):
-    details = details.text
+    details = details.get_text(separator='\n')
+    details = details.replace('\n \n', '\n')
     detailsList.append(details)
-dlnum = 1
+#print(detailsList)
+# dlnum = 1
 for dl in detailsList:
-    #print(dlnum, ": ", dl)
-    dlnum +=1
+    print(dl)
+    # print(dlnum, ": ", dl)
+    # dlnum +=1
 
 # # genre = soup.find("strong")
 # # print(genre.string)

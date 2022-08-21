@@ -135,14 +135,21 @@ for title in soup.find_all("h3"):
     title = title.string
     titleList.append(title)
 # scrape description
+#https://stackoverflow.com/questions/31140143/how-to-add-space-around-removed-tags-in-beautifulsoup how to add space around scraped elements
 descList = []
 for desc in soup.findAll("div", {"class": "nsp-description"}):
     desc = desc.string
     descList.append(desc.replace("\n", ""))
 # scrape details
+# detailsList=[]
+# for details in soup.find_all("div", {"class": "nsp-details"}):
+#     details = details.text
+#     detailsList.append(details)
+
 detailsList=[]
 for details in soup.find_all("div", {"class": "nsp-details"}):
-    details = details.text
+    details = details.get_text(separator='\n')
+    details = details.replace('\n \n', '\n')
     detailsList.append(details)
 #scrape the link to the movies description page on Lighthouse.ie
 linkList= []
@@ -150,7 +157,8 @@ for link in soup.findAll("div", {"class": "nsp-poster"}):
     linkText = link.find('a')['href']
 
     linkList.append(linkText)
-
+    
+#https://www.geeksforgeeks.org/python-using-for-loop-in-flask/  how to use for loop in python to html
 @app.route('/Lighthouse')
 def lighthouseScrape():
     return render_template("scrape.html", titleList = titleList, descList = descList, detailsList = detailsList, linkList = linkList, zip = zip)

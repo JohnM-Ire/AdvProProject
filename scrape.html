@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>LightHouse Events</title>
+
 </head>
 <body>
-<table>
-        <tr>
-                <th>Movie Title</th>
-                <th>Description</th>
-        </tr>
-        {% for (movTitle, movDetails, movDesc, linkhtml) in zip(titleList, detailsList, descList, linkList) %}
-                <tr>
-                        <td><h2><a href="{{ linkhtml }}">{{ movTitle }}</a></h2> <br>
-                        {{ movDetails }}</td>
-                        <td><a href="{{ linkhtml }}">{{ movDesc }}</a></td>
-                </tr>
-        {% endfor %}
-</table>
+<!--https://www.geeksforgeeks.org/python-using-for-loop-in-flask/  how to use for loop in python to html-->
+{% for (movTitle, movDetails, movDesc, linkhtml) in zip(titleList, detailsList, descList, linkList) %}
+<div style="float : left; width: 25%; height : 300px; background-color : red; ">
+        <p>IMAGE</p>
+</div>
 
+<div style="float : left; width: 75%; height : 300px; background-color : yellow; ">
+        <h2><a href="{{ linkhtml }}">{{ movTitle }}</a></h2>
+        <span> {{ movDetails }} </span>
+        <p><a href="{{ linkhtml }}">{{ movDesc }}</a></p>
+</div>
+
+{% endfor %}
 </body>
 </html>
