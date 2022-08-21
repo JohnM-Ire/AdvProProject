@@ -124,7 +124,7 @@ def DeleteSingleReview(movie_id):
 
     return render_template('deleteMovie.html', movie = movie)
 
-#Code to scrape LightHouse and create 3 lists with Title, Description and Details:
+#Code to scrape LightHouse.ie and create lists of Movie Title, Movie Description and Movie Details:
 
 url = 'https://www.lighthousecinema.ie/films/'
 html = urlopen(url).read()
@@ -157,11 +157,18 @@ for link in soup.findAll("div", {"class": "nsp-poster"}):
     linkText = link.find('a')['href']
 
     linkList.append(linkText)
-    
+
+#scrape to get the poster images
+imageList= []
+for image in soup.findAll("div", {"class": "nsp-poster"}):
+    imageLink = image.find('img')['src']
+    imageLink = imageLink.replace('/themes', 'https://www.lighthousecinema.ie/themes')
+    imageList.append(imageLink)
+
 #https://www.geeksforgeeks.org/python-using-for-loop-in-flask/  how to use for loop in python to html
 @app.route('/Lighthouse')
 def lighthouseScrape():
-    return render_template("scrape.html", titleList = titleList, descList = descList, detailsList = detailsList, linkList = linkList, zip = zip)
+    return render_template("scrape.html", titleList = titleList, descList = descList, detailsList = detailsList, linkList = linkList, imageList= imageList, zip = zip)
 
 if __name__ =='__main__':
     app.run(debug = True)

@@ -15,7 +15,7 @@ for title in soup.find_all("h3"):
     titleList.append(title)
 tnum = 1
 for t in titleList:
-    print(tnum, ": ", t)
+    # print(tnum, ": ", t)
     tnum = tnum+1
 
 #print(titleList)
@@ -25,7 +25,7 @@ for link in soup.findAll("div", {"class": "nsp-poster"}):
     linkList.append(linkText)
 lnum = 1
 for l in linkList:
-    print(lnum, ": ", l)
+    # print(lnum, ": ", l)
     lnum = lnum+1
 
 
@@ -57,8 +57,8 @@ for details in soup.find_all("div", {"class": "nsp-details"}):
     detailsList.append(details)
 #print(detailsList)
 # dlnum = 1
-for dl in detailsList:
-    print(dl)
+#for dl in detailsList:
+    # print(dl)
     # print(dlnum, ": ", dl)
     # dlnum +=1
 
@@ -69,3 +69,10 @@ for dl in detailsList:
 
 # for (movTitle, movDetails, movDesc) in zip(titleList, detailsList, descList ):
 #     print(f"Title: {movTitle}\n{movDetails}\nMovie Description: {movDesc}")
+imageList= []
+for image in soup.findAll("div", {"class": "nsp-poster"}):
+    imageLink = image.find('img')['src']
+    imageLink = imageLink.replace('/themes', 'https://www.lighthousecinema.ie/themes')
+    imageList.append(imageLink)
+
+print(imageList)
