@@ -9,7 +9,8 @@
 <!--https://www.geeksforgeeks.org/python-using-for-loop-in-flask/  how to use for loop in python to html-->
 {% for (movTitle, movDetails, movDesc, linkhtml, image) in zip(titleList, detailsList, descList, linkList, imageList) %}
 <div style="float : left; width: 25%; height : 250px; background-color : red; ">
-        <img src="{{ image }}">
+        <a href="{{ linkhtml }}"><img src="{{ image }}"
+                                      style = "height : 100%; width : auto; display: block; margin-left: auto; margin-right: auto;"></a>
 </div>
 
 <div style="float : left; width: 75%; height : 250px; background-color : yellow;">

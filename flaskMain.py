@@ -162,6 +162,7 @@ for link in soup.findAll("div", {"class": "nsp-poster"}):
 imageList= []
 for image in soup.findAll("div", {"class": "nsp-poster"}):
     imageLink = image.find('img')['src']
+#using replace() to allow me to scrape images that are in the lighthousecinema assets folder.
     imageLink = imageLink.replace('/themes', 'https://www.lighthousecinema.ie/themes')
     imageList.append(imageLink)
 
