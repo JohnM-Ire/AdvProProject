@@ -6,8 +6,9 @@
 </head>
 <body>
 
-<p>you entered : {{ searchTerm }}</p>
-
-
+<p>Results for {{ searchTerm }}</p>
+{% for result in searchresultsList %}
+<h2>{{ result }}</h2>
+{% endfor %}
 </body>
 </html>
