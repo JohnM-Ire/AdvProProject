@@ -18,7 +18,7 @@ def create_table():
     userdb.create_all()
     db.create_all()
 
-@app.route('/')
+#@app.route('/')
 # #Alt Login method to see if this works better
 # @app.route('/login', methods= ['POST'])
 # def login():
@@ -78,6 +78,19 @@ def homePage():
     users = UserModel.query.all()
     return render_template('homePage.html', users= users)
 
+@app.route('/search', methods= ['GET', 'POST'])
+def searchMovies():
+    if request.method == 'GET':
+        return render_template('search.html')
+
+    if request.method == 'POST':
+        searchTerm = request.form['searchTerm']
+        return render_template('searchResults.html', searchTerm = searchTerm)
+
+@app.route('/searchresults', methods = ['GET', 'POST'],)
+def searchResult():
+    if request.method == 'GET':
+        return render_template('searchResults.html')
 
 
 #to take the user input and post the details to our database
