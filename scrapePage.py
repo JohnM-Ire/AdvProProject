@@ -20,7 +20,7 @@ for t in titleList:
 
 #print(titleList)
 linkList= []
-for link in soup.findAll("div", {"class": "nsp-poster"}):
+for link in soup.findAll("td", {"class": "nsp-poster"}):
     linkText = link.find('a')['href']
     linkList.append(linkText)
 lnum = 1

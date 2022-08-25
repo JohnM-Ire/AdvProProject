@@ -6,9 +6,10 @@
 </head>
 <body>
 
-<p>Results for {{ searchTerm }}</p>
-{% for result in searchresultsList %}
-<h2>{{ result }}</h2>
+<p>{{numresults }} result(s) for {{ usersearchTerm }}</p>
+
+{% for (result, link) in zip(searchresultsList, searchlinkList) %}
+<p><a href="{{ link }} ">{{ result }}</p>
 {% endfor %}
 </body>
 </html>

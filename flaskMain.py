@@ -84,18 +84,24 @@ def searchMovies():
         return render_template('search.html')
 
     if request.method == 'POST':
-        searchTerm = request.form['searchTerm']
-        searchTerm = searchTerm.replace(' ', '+')
+        usersearchTerm = request.form['searchTerm']
+        searchTerm = usersearchTerm.replace(' ', '+')
         url = 'https://www.imdb.com/find?q=' + searchTerm + '&s=tt&ttype=ft&ref_=fn_ft'
         html = urlopen(url).read()
         soup = BeautifulSoup(html, features='html.parser')
 
         searchresultsList = []
-        # for results in soup.find_all("h3", {"class": "result_text"}):
         for results in soup.find_all("td", {"class": "result_text"}):
             results = results.text
             searchresultsList.append(results)
-        return render_template('searchResults.html', searchresultsList = searchresultsList)
+        numresults = len(searchresultsList)
+
+        searchlinkList = []
+        for sLink in soup.findAll("td", {"class": "primary_photo"}):
+            sLinkText = sLink.find('a')['href']
+            sLinkText = 'https://www.imdb.com' + sLinkText
+            searchlinkList.append(sLinkText)
+        return render_template('searchResults.html',usersearchTerm = usersearchTerm, searchTerm = searchTerm,numresults= numresults,  searchresultsList = searchresultsList, searchlinkList = searchlinkList, zip = zip)
 
 
 # url = 'https://www.imdb.com/find?q='+searchTerm+'&ref_=nv_sr_sm'
