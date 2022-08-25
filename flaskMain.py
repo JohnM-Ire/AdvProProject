@@ -32,15 +32,43 @@ def create_table():
 
 
 @app.route('/', methods= ['POST', 'GET'])
-def landPage():
-    return render_template('landingPage.html')
+# def landPage():
+#     return render_template('landingPage.html')
+def Login():
+    if request.method == 'GET':
+        return render_template('landingPage.html')
+    else:
+        name = request.form['username']
+        passw = request.form['password']
+        try:
+            attempt = user.query.filter_by(username=name, password=passw).first()
+            if attempt is not None:
+                session['logged_in'] = True
+                return redirect('homePage.html')
+            else:
+                return 'Incorrect Login'
+        except:
+            return "Incorrect Login"
+    # username = request.form.get("username")
+    # password = request.form.get("password")
+    # user = UserModel.query.filter_by(password=password).first()
+    # if not user:
+    #     return redirect('landingPage.html')
+    #
+    # return redirect('homePage.html')
+    # if request.method =="POST":
+    #
+    #
+    #     exists = userdb.session.query(
+    #         userdb.session.query(User).filter_by(username=username).exists()
+    #     ).scalar()
+    #     if exists == True:
+    #         redirect('/home')
 
-    if request.method =="POST":
 
-        username=request.form.get("username")
-        password=request.form.get("password")
+        #ret = Session.query(exists().where(and_(userModel.username == username, userModel.password == password)))
+        #user = userModel.query.filter_by(username=username).count()
 
-        user = user.query.filter_by(username=username).first()
 
         # usernameEntry = userdb.execute("SELECT username FROM usertable"
         #                                "WHERE username=:username",{"username":username}).fetchone()
@@ -53,10 +81,10 @@ def landPage():
     #     else:
     #         return redirect('/')
     # return render_template('landingPage.html')
-        if not user or not (user.password == password):
-            return redirect('/signUp')
+    #     else:
+    #         return redirect('/signUp')
 
-        return redirect('/home')
+        # return redirect('/home')
 
 @app.route('/signUp', methods= ['GET', 'POST'])
 def signUp():

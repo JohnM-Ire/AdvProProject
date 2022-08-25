@@ -5,15 +5,18 @@
   <title>Title</title>
 </head>
 <body>
+{% if session['logged_in'] %}
+<p>You are logged in already!</p>
+{% else %}
 <h1>Welcome, to Movie Reviews</h1>
-  <form action='' method = "POST">
+  <form action='/' method = "POST" >
       <table>
           <tr><td>Username</td><td><input type = "text" name = "username"></td></tr>
           <tr><td>Enter Password</td><td><input type = "text" name = "password"></td></tr>
           <tr><td><input type = "submit" value = "Log-in"></td></tr>
       </table>
 </form>
-
+{% endif %}
 <p><a href="/signUp">Sign Up</a></p>
 
 </body>
