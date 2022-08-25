@@ -41,10 +41,10 @@ def Login():
         name = request.form['username']
         passw = request.form['password']
         try:
-            attempt = user.query.filter_by(username=name, password=passw).first()
+            attempt = UserModel.query.filter_by(username=name, password=passw).first()
             if attempt is not None:
                 session['logged_in'] = True
-                return redirect('homePage.html')
+                return redirect('/home')
             else:
                 return 'Incorrect Login'
         except:
