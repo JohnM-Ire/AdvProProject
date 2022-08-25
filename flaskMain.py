@@ -85,9 +85,29 @@ def searchMovies():
 
     if request.method == 'POST':
         searchTerm = request.form['searchTerm']
-        return render_template('searchResults.html', searchTerm = searchTerm)
+        searchTerm = searchTerm.replace(' ', '+')
+        url = 'https://www.imdb.com/find?q=' + searchTerm + '&s=tt&ttype=ft&ref_=fn_ft'
+        html = urlopen(url).read()
+        soup = BeautifulSoup(html, features='html.parser')
 
-@app.route('/searchresults', methods = ['GET', 'POST'],)
+        searchresultsList = []
+        # for results in soup.find_all("h3", {"class": "result_text"}):
+        for results in soup.find_all("td", {"class": "result_text"}):
+            results = results.text
+            searchresultsList.append(results)
+        return render_template('searchResults.html', searchresultsList = searchresultsList)
+
+
+# url = 'https://www.imdb.com/find?q='+searchTerm+'&ref_=nv_sr_sm'
+# html = urlopen(url).read()
+# soup = BeautifulSoup(html, features='html.parser')
+#
+# searchresultsList= []
+# for results in soup.find_all("td", {"class": "result_text"}):
+#     results = results.text
+#     searchresultsList.append(results)
+
+@app.route('/searchresults', methods = ['GET', 'POST'])
 def searchResult():
     if request.method == 'GET':
         return render_template('searchResults.html')
@@ -136,6 +156,7 @@ def DeleteSingleReview(movie_id):
             return redirect('/reviewlist')
 
     return render_template('deleteMovie.html', movie = movie)
+
 
 #Code to scrape LightHouse.ie and create lists of Movie Title, Movie Description and Movie Details:
 
