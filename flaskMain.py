@@ -49,42 +49,11 @@ def Login():
                 return 'Incorrect Login'
         except:
             return "Incorrect Login"
-    # username = request.form.get("username")
-    # password = request.form.get("password")
-    # user = UserModel.query.filter_by(password=password).first()
-    # if not user:
-    #     return redirect('landingPage.html')
-    #
-    # return redirect('homePage.html')
-    # if request.method =="POST":
-    #
-    #
-    #     exists = userdb.session.query(
-    #         userdb.session.query(User).filter_by(username=username).exists()
-    #     ).scalar()
-    #     if exists == True:
-    #         redirect('/home')
 
-
-        #ret = Session.query(exists().where(and_(userModel.username == username, userModel.password == password)))
-        #user = userModel.query.filter_by(username=username).count()
-
-
-        # usernameEntry = userdb.execute("SELECT username FROM usertable"
-        #                                "WHERE username=:username",{"username":username}).fetchone()
-        # passwordEntry = userdb.execute("SELECT password FROM usertable"
-        #                                "WHERE username=:username",{"username":username}).fetchone()
-
-    #     if usernameEntry == username and passwordEntry == password:
-    #         session['username']= username
-    #         return redirect('/home')
-    #     else:
-    #         return redirect('/')
-    # return render_template('landingPage.html')
-    #     else:
-    #         return redirect('/signUp')
-
-        # return redirect('/home')
+@app.route("/logout")
+def logoutUser():
+    session['logged_in'] = False
+    return redirect('/')
 
 @app.route('/signUp', methods= ['GET', 'POST'])
 def signUp():
