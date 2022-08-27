@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin home Page</title>
+    	<style>
+		button {
+			color: #dce1d6;
+			width: 250px;
+			background-color: #6b5b95;
+			font-size: 19px;
+			border: 1px solid #8a0505;
+			padding: 15px 50px;
+			cursor: pointer
+		}
+		button:hover {
+			color: #030e01;
+			background-color: #a2b9bc;
+		}
+		body {
+		    background-color: #878f99
+		}
+	</style>
+</head>
+<body>
+<!--<div style=" width; 100%; height:Auto; background-color:#a2b9bc; ; text-align:center;">-->
+<div id="wrapper">
+    <div class="home_1">
+        <h1>Home</h1>
+        <a href="/logout">Log Out</a>
+
+            <h2>Welcome to the Movie Review Vault Admin Page</h2>
+            <p>All users and their passwords:</p>
+            {% for user in users %}
+
+                <p>username {{user.username}} password {{user.password}}</p>
+
+            {% endfor %}
+    </div>
+    <div style="width:50%; height: 200px; float: left; background-color:#b2ad7f; text-align:center;">
+        <p>Follow the links below to add your review or view the reviews left by other users.</p>
+        <a href="/data/addData"><button type="button" name="addButton">Add Reviews</button></a><br>
+        <a href="/reviewlist"><button type="button" name="addButton">View Reviews</button></a>
+
+    </div>
+        <div style="width:50%;height: 200px; float: left; background-color:#b2ad7f; text-align:center;">
+        <p>See current and upcoming films and events at Lighthouse Cinema:</p>
+        <a href="/Lighthouse"><button type="button" name="LighthouseLink">LightHouse Films</button></a>
+        <a href="/search"><button type="button" name="searchLink">Movie Database</button></a>
+    </div>
+</div>
+</body>
+</html>

@@ -45,6 +45,9 @@ def Login():
             if attempt is not None:
                 session['logged_in'] = True
                 return redirect('/home')
+            # elif attempt is not None and name == "JohnM89" and passw =="ozzyozzy":
+            #     session['logged_in'] = True
+            #     return redirect('/homeAdmin')
             else:
                 return 'Incorrect Login'
         except:
@@ -70,6 +73,11 @@ def signUp():
         userdb.session.commit()
         return redirect('/home')
 
+@app.route('/homeAdmin')
+def adminHomePage():
+    users = UserModel.query.all()
+    return render_template('homeAdmin.html', users= users)
+
 @app.route('/home')
 def homePage():
     users = UserModel.query.all()
@@ -88,17 +96,27 @@ def searchMovies():
         soup = BeautifulSoup(html, features='html.parser')
 
         searchresultsList = []
-        for results in soup.find_all("td", {"class": "result_text"}):
+        for results in soup.find_all("td", {"class": "result_text"}, limit=10):
             results = results.text
             searchresultsList.append(results)
         numresults = len(searchresultsList)
 
         searchlinkList = []
-        for sLink in soup.findAll("td", {"class": "primary_photo"}):
+        for sLink in soup.findAll("td", {"class": "primary_photo"}, limit=10):
             sLinkText = sLink.find('a')['href']
             sLinkText = 'https://www.imdb.com' + sLinkText
             searchlinkList.append(sLinkText)
-        return render_template('searchResults.html',usersearchTerm = usersearchTerm, searchTerm = searchTerm,numresults= numresults,  searchresultsList = searchresultsList, searchlinkList = searchlinkList, zip = zip)
+
+        genreList = []
+        for a in searchlinkList:
+            url = a
+            html = urlopen(url).read()
+            soup = BeautifulSoup(html, features='html.parser')
+            for genre in soup.find_all("span", {"class": "ipc-chip__text"}):
+                genre = genre.string
+                if genre != "Back to top":
+                    genreList.append(genre)
+        return render_template('searchResults.html',usersearchTerm = usersearchTerm, searchTerm = searchTerm,numresults= numresults,  searchresultsList = searchresultsList, searchlinkList = searchlinkList, genreList = genreList, zip = zip)
 
 
 # url = 'https://www.imdb.com/find?q='+searchTerm+'&ref_=nv_sr_sm'

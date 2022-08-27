@@ -2,7 +2,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import itertools
 
-searchTerm = 'three billboards outside ebbing'
+searchTerm = 'dredd'
 searchTerm = searchTerm.replace(' ', '+')
 
 #url = 'https://www.allmovie.com/search/movies/300'
@@ -13,16 +13,16 @@ soup = BeautifulSoup(html, features='html.parser')
 
 
 
-# searchresultsList= []
-#
-# for results in soup.find_all("td", {"class": "result_text"}):
-#     results = results.text
-#     searchresultsList.append(results)
+searchresultsList= []
+
+for results in soup.find_all("td", {"class": "result_text"}):
+    results = results.text
+    searchresultsList.append(results)
 # for l in searchresultsList:
 #     print(l)
 
 searchlinkList= []
-for sLink in soup.findAll("td", {"class": "primary_photo"}):
+for sLink in soup.findAll("td", {"class": "primary_photo"}, limit= 20):
     sLinkText = sLink.find('a')['href']
     sLinkText = 'https://www.imdb.com'+ sLinkText
     searchlinkList.append(sLinkText)
@@ -36,8 +36,11 @@ for a in searchlinkList:
         genre =genre.string
         if genre != "Back to top":
             genreList.append(genre)
-print(genreList)
-for g in genreList:
-    print(g)
+#print(genreList)
+# for g in genreList:
+#     print(g)
+genreList= list(zip(*[iter(genreList)]*3))
 
 
+for movie, g in zip(searchresultsList, genreList):
+    print(movie, g)
