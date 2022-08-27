@@ -116,6 +116,8 @@ def searchMovies():
                 genre = genre.string
                 if genre != "Back to top":
                     genreList.append(genre)
+        genreList = list(zip(*[iter(genreList)] * 3))
+
         return render_template('searchResults.html',usersearchTerm = usersearchTerm, searchTerm = searchTerm,numresults= numresults,  searchresultsList = searchresultsList, searchlinkList = searchlinkList, genreList = genreList, zip = zip)
 
 
