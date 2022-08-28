@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from Moviedb import db, MovieModel
 from userDB import userdb, UserModel
+from newMovieDB import newdb, newMovieModel
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import itertools
@@ -17,6 +18,7 @@ db.init_app(app)
 def create_table():
     userdb.create_all()
     db.create_all()
+    newdb.create_all()
 
 #@app.route('/')
 # #Alt Login method to see if this works better
@@ -121,15 +123,6 @@ def searchMovies():
         return render_template('searchResults.html',usersearchTerm = usersearchTerm, searchTerm = searchTerm,numresults= numresults,  searchresultsList = searchresultsList, searchlinkList = searchlinkList, genreList = genreList, zip = zip)
 
 
-# url = 'https://www.imdb.com/find?q='+searchTerm+'&ref_=nv_sr_sm'
-# html = urlopen(url).read()
-# soup = BeautifulSoup(html, features='html.parser')
-#
-# searchresultsList= []
-# for results in soup.find_all("td", {"class": "result_text"}):
-#     results = results.text
-#     searchresultsList.append(results)
-
 @app.route('/searchresults', methods = ['GET', 'POST'])
 def searchResult():
     if request.method == 'GET':
@@ -141,44 +134,83 @@ def searchResult():
 def addDetails():
     if request.method == 'GET':
         return render_template('addpage.html')
+#Original MovieDB
+    # if request.method == 'POST':
+    #     id = request.form['id']
+    #     movie_id = request.form['movie_id']
+    #     movie_name = request.form['movie_name']
+    #     relyear = request.form['relyear']
+    #     # genre = request.form['genre']
+    #     description = request.form['description']
+    #     movie = MovieModel(id=id, movie_id=movie_id, movie_name=movie_name, relyear=relyear, description=description)
+    #
+    #     db.session.add(movie)
+    #     db.session.commit()
+    #     return redirect('/reviewlist')
 
+#NewMovieDB
     if request.method == 'POST':
-        id = request.form['id']
-        movie_id = request.form['movie_id']
         movie_name = request.form['movie_name']
         relyear = request.form['relyear']
-        # genre = request.form['genre']
+        genre = request.form['genre']
+        signature = request.form['signature']
         description = request.form['description']
-        movie = MovieModel(id=id, movie_id=movie_id, movie_name=movie_name, relyear=relyear, description=description)
+        newmovie = newMovieModel(movie_name=movie_name, relyear=relyear, genre=genre, signature=signature, description=description)
 
-        db.session.add(movie)
-        db.session.commit()
+        newdb.session.add(newmovie)
+        newdb.session.commit()
         return redirect('/reviewlist')
 
 @app.route('/reviewlist')
 def RetrieveReviewList():
-    movies = MovieModel.query.all()
-    return render_template('reviewlist.html' , movies = movies)
+    #Original Movie DB
+    # movies = MovieModel.query.all()
+    # return render_template('reviewlist.html' , movies = movies)
+
+    #NewMovieDB
+    movies = newMovieModel.query.all()
+    return render_template('reviewlist.html', movies = movies)
 
 @app.route('/usersPage')
 def retrieveUsers():
     users = UserModel.query.all()
     return render_template('usersPage.html' , users = users)
 
-@app.route('/data/<int:movie_id>')
-def RetrieveSingleReview(movie_id):
-    movie = MovieModel.query.filter_by(movie_id=movie_id).first()
+    # ORIGINAL DB
+# @app.route('/data/<int:movie_id>')
+# def RetrieveSingleReview(movie_id):
+    # movie = MovieModel.query.filter_by(movie_id=movie_id).first()
+    # if movie:
+    #     return render_template('data.html', movie = movie)
+    # return f"No Movie review with id {id} in Reviews"
+
+    #NEW DATABASE
+@app.route('/data/<int:id>')
+def RetrieveSingleReview(id):
+    movie = newMovieModel.query.filter_by(id=id).first()
     if movie:
         return render_template('data.html', movie = movie)
     return f"No Movie review with id {id} in Reviews"
 
-@app.route('/delete/<int:movie_id>', methods=['GET', 'POST'])
-def DeleteSingleReview(movie_id):
-    movie = MovieModel.query.filter_by(movie_id=movie_id).first()
+
+#ORIGINAL MOVIE DATABASE
+# @app.route('/delete/<int:movie_id>', methods=['GET', 'POST'])
+# def DeleteSingleReview(movie_id):
+    # movie = MovieModel.query.filter_by(movie_id=movie_id).first()
+    # if request.method == 'POST':
+    #     if movie:
+    #         db.session.delete(movie)
+    #         db.session.commit()
+    #         return redirect('/reviewlist')
+
+#NEW UPDATED DATABASE
+@app.route('/delete/<int:id>', methods=['GET', 'POST'])
+def DeleteSingleReview(id):
+    movie = newMovieModel.query.filter_by(id=id).first()
     if request.method == 'POST':
         if movie:
-            db.session.delete(movie)
-            db.session.commit()
+            newdb.session.delete(movie)
+            newdb.session.commit()
             return redirect('/reviewlist')
 
     return render_template('deleteMovie.html', movie = movie)
