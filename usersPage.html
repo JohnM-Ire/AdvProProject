@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2><a href="/homeAdmin">Admin Home</a></h2>
+<h1>All Registered Users</h1>
+<p>{{ username }}</p>
+{% for user in users %}
+<hr>
+    <p>Username: {{ user.username }}</p><p>Password: {{ user.password }}</p>
+    <a href="/delete/{{user.username}}"><button type="button" name="delUserButton">Delete User</button></a>
+{% endfor %}
+
+
+</body>
+</html>

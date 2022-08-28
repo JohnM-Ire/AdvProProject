@@ -10,7 +10,7 @@
 <p>{{numresults }} result(s) for {{ usersearchTerm }}</p>
 
 {% for (result, link, genre) in zip(searchresultsList, searchlinkList, genreList) %}
-<p><a href="{{ link }} ">{{ result }}</a>  {{ genre }}</p>
+<p><a href="{{ link }} "><b>{{ result }}</b></a>, -  {{ genre }}</p>
 {% endfor %}
 </body>
 </html>
