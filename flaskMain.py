@@ -42,14 +42,14 @@ def Login():
         passw = request.form['password']
         try:
             attempt = UserModel.query.filter_by(username=name, password=passw).first()
-            if attempt is not None:
+            if attempt is not None and name == "JohnM89" and passw =="ozzyozzy":
+                session['logged_in'] = True
+                return redirect('/homeAdmin')
+            elif attempt is not None:
                 session['logged_in'] = True
                 return redirect('/home')
-            # elif attempt is not None and name == "JohnM89" and passw =="ozzyozzy":
-            #     session['logged_in'] = True
-            #     return redirect('/homeAdmin')
             else:
-                return 'Incorrect Login'
+                return 'Incorrect Login Details '
         except:
             return "Incorrect Login"
 
@@ -160,7 +160,10 @@ def RetrieveReviewList():
     movies = MovieModel.query.all()
     return render_template('reviewlist.html' , movies = movies)
 
-
+@app.route('/usersPage')
+def retrieveUsers():
+    users = UserModel.query.all()
+    return render_template('usersPage.html' , users = users)
 
 @app.route('/data/<int:movie_id>')
 def RetrieveSingleReview(movie_id):
@@ -180,7 +183,16 @@ def DeleteSingleReview(movie_id):
 
     return render_template('deleteMovie.html', movie = movie)
 
+@app.route('/delete/<string:username>', methods=['GET', 'POST'])
+def DeleteSingleUser(username):
+    user = UserModel.query.filter_by(username=username).first()
+    if request.method == 'POST':
+        if user:
+            userdb.session.delete(user)
+            userdb.session.commit()
+            return redirect('/usersPage')
 
+    return render_template('deleteUser.html', user = user)
 #Code to scrape LightHouse.ie and create lists of Movie Title, Movie Description and Movie Details:
 
 url = 'https://www.lighthousecinema.ie/films/'
