@@ -9,8 +9,16 @@
 <h1>The reviews</h1>
 <p>Movie Name</p>
 <p>Select a movie title to read the review</p>
+<!--ORIGINAL MOVIESDB-->
+<!--{% for movie in movies %}-->
+<!--<p><a href="/data/{{movie.movie_id}}">{{movie.movie_name}} ({{movie.relyear}})</a></p>-->
+<!--<hr>-->
+<!--{% endfor %}-->
+
+<!--NEW MOVIES DB-->
 {% for movie in movies %}
-<p><a href="/data/{{movie.movie_id}}">{{movie.movie_name}} ({{movie.relyear}})</a></p>
+<p><a href="/data/{{newmovie.id}}">{{ newmovie.id }} : {{newmovie.movie_name}} : ({{newmovie.relyear}})</a> {{ newmovie.genre }} {{ newmovie.signature}}</p>
+<p>{{ newmovie.description }}</p>
 <hr>
 {% endfor %}
     <a href="/data/addData"><button type="button" name="addButton">Add Review</button></a>

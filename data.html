@@ -4,22 +4,43 @@
     <meta charset="UTF-8">
     <title>Reviews</title>
 </head>
+
+<!--ORIGINAL DATABASE-->
+<!--<body>-->
+<!--<h2><a href="/home">Home</a></h2>-->
+<!--<p>Review for {{movie.movie_name}}</p>-->
+
+<!--<p>Movie ID</p>-->
+<!--<p>{{movie.movie_id}}</p><hr>-->
+<!--<p>Movie Name</p>-->
+<!--<p>{{movie.movie_name}}</p><hr>-->
+<!--<p>Release Year</p>-->
+<!--<p>{{movie.relyear}}</p><hr>-->
+<!--&lt;!&ndash;<p>Genre</p>&ndash;&gt;-->
+<!--&lt;!&ndash;<p>{{movie.genre}}</p><hr>&ndash;&gt;-->
+<!--<p>Review</p>-->
+<!--<p>{{movie.description}}</p><hr>-->
+
+<!--    <a href="/delete/{{movie.movie_id}}"><button type="button" name="delButton">Delete Review</button></a>-->
+
+<!--</body>-->
+
 <body>
 <h2><a href="/home">Home</a></h2>
-<p>Review for {{movie.movie_name}}</p>
+<p>Review for {{movie.movie_name}} written by {{movie.signature}}</p>
 
 <p>Movie ID</p>
-<p>{{movie.movie_id}}</p><hr>
+<p>{{movie.id}}</p><hr>
 <p>Movie Name</p>
 <p>{{movie.movie_name}}</p><hr>
 <p>Release Year</p>
 <p>{{movie.relyear}}</p><hr>
-<!--<p>Genre</p>-->
-<!--<p>{{movie.genre}}</p><hr>-->
+<p>Genre</p>
+<p>{{movie.genre}}</p><hr>
 <p>Review</p>
 <p>{{movie.description}}</p><hr>
 
-    <a href="/delete/{{movie.movie_id}}"><button type="button" name="delButton">Delete Review</button></a>
+    <a href="/delete/{{movie.id}}"><button type="button" name="delButton">Delete Review</button></a>
 
 </body>
 </html>

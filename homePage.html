@@ -27,15 +27,11 @@
 <div id="wrapper">
     <div class="home_1">
         <h1>Home</h1>
-        <a href="/logout">Log Out</a>
+        <a href="/logout">Log Out</a><br><br>
+        <a href="/homeAdmin">Admin</a>
 
             <h2>Welcome to the Movie Review Vault</h2>
-            <p>All users and their passwords:</p>
-            {% for user in users %}
 
-                <p>username {{user.username}} password {{user.password}}</p>
-
-            {% endfor %}
     </div>
     <div style="width:50%; height: 200px; float: left; background-color:#b2ad7f; text-align:center;">
         <p>Follow the links below to add your review or view the reviews left by other users.</p>
