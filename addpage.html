@@ -3,11 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <title>ADDPAGE</title>
+    <style>
+
+*{
+    margin:0;
+}
+html, body{
+    height: 100%;
+}
+
+#wrapper{
+    float:left;
+    width: 100%;
+    min-height: 100%;
+    padding-bottom: 70px;
+    background-color:#d5dae8;
+    box-sizing: border-box;
+}
+
+#top-image-box{
+	float:left;
+	width:100%;
+	height:30vh;
+	text-align: center;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+#home{
+    float: left;
+    width:100%;
+    height:80px;
+    position: absolute;
+    padding-top: 60px;
+}
+#revButton {
+    color: #dce1d6;
+    width: 250px;
+    background-color: #6b5b95;
+    font-size: 19px;
+    border: 1px solid #8a0505;
+    margin: 10px;
+    padding: 15px 50px;
+    cursor: pointer
+}
+#revButton:hover {
+    color: #030e01;
+    background-color: #a2b9bc;
+}
+.review-input{
+width: 30%;
+height: 20px;
+margin: 0 auto;
+display: block;
+font-size: 18px;
+outline:0;
+border-width: 0 0 2px;
+border-color: #000;
+background: white;
+
+}
+textarea{
+    width: 50%;
+	resize: vertical;
+	max-height: 600px;
+	margin: 0 auto;
+	margin-top: 10px;
+	display: block;
+	font-family: PTSans;
+	font-size: 18px;
+	border-radius: 2px;
+
+}
+
+body {
+    background-color:#d5dae8
+}
+footer{
+    float: left;
+    width:100%;
+    height:50px;
+    background: #5f70a6;
+    text-align: center;
+    color: #fff;
+    margin-top: -50px;
+    padding-top: -10px;
+    box-sizing: border-box;
+}
+	</style>
 </head>
-<body>
-<h2><a href="/home">Home</a></h2>
-<p>Enter the movie details and your review below</p>
-  <form action='' method = "POST">
+
 <!--      ORIGINAL MOVIE DB-->
 <!--      <table>-->
 <!--          <tr><td>Record ID</td><td><input type = "text" name = "id"></td></tr>-->
@@ -19,15 +103,52 @@
 <!--      </table>-->
 
 <!--      NEW MOVIEDB-->
-            <table>
 
-          <tr><td>Add the movie title</td><td><input type = "text" name = "movie_name"></td></tr>
-          <tr><td>The Year of Release</td><td><input type = "text" name = "relyear"></td></tr><tr>
-          <td>Add the Genre</td><td><input type = "text" name = "genre"></td></tr>
-          <tr><td>Signature</td><td><input type = "text" name = "signature"></td></tr>
-          <tr><td>Review:</td></tr><tr><td><textarea rows="10" cols="40" name = "description">Enter You Review here</textarea></td></tr>
-          <tr><td><input type = "submit" value = "Submit Review"></td></tr>
-      </table>
-</form>
+<body>
+<!--<div style=" width; 100%; height:Auto; background-color:#a2b9bc; ; text-align:center;">-->
+<div id="wrapper">
+
+    <div id="top-image-box">
+
+        <header id="home">
+            <h1 style="font-size: 90px; color: grey">Movie Review Vault</h1>
+        </header>
+        <img src="https://media.bizj.us/view/img/11964600/gettyimages-1216803153*1200xx5184-2916-0-270.jpg" style="width : 100%; height : auto;">
+    </div>
+    <div style="width: 100%; height 50px; float: left: text align: left;">
+         <span><a href="/home">Home</a></span>
+        <span> <a href="/logout">Log Out</a></span>
+    </div>
+
+    <div style="width:100%;height: 100%; float: left; background-color:#d5dae8; text-align:center;">
+
+        <p>Enter the movie details and your review below</p><br>
+         <form id="review-form" action='' method = "POST">
+                <p>Add the movie title</p>
+                <label for="title"></label>
+                <input type = "text" name = "movie_name" class="review-input"><br>
+                <p>The Year of Release</p>
+                <label for="Year of Release"></label>
+                <input type = "text" name = "relyear" class="review-input"><br>
+                <p>Add the Genre(s)</p>
+                <label for="Genre"></label>
+                <input type = "text" name = "genre" class="review-input"><br>
+                <p>Signature</p>
+                <label for="Signature"></label>
+                <input type = "text" name = "signature" class="review-input"><br>
+                <p>Review:</p>
+                <textarea rows="6" name = "description">Enter You Review here</textarea><br>
+             <input type = "submit" value = "Submit Review" id="revButton">
+         </form>
+
+    </div>
+
+</div>
+<footer>
+	<p>Movie Review Vault by John Murphy | &copy; 2022</p>
+
+</footer>
+
 </body>
+
 </html>
