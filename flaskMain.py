@@ -227,49 +227,51 @@ def DeleteSingleUser(username):
     return render_template('deleteUser.html', user = user)
 #Code to scrape LightHouse.ie and create lists of Movie Title, Movie Description and Movie Details:
 
-url = 'https://www.lighthousecinema.ie/films/'
-html = urlopen(url).read()
-soup = BeautifulSoup(html, features='html.parser')
-#scrape movie titles
-titleList = []
-for title in soup.find_all("h3"):
-    title = title.string
-    titleList.append(title)
-# scrape description
-#https://stackoverflow.com/questions/31140143/how-to-add-space-around-removed-tags-in-beautifulsoup how to add space around scraped elements
-descList = []
-for desc in soup.findAll("div", {"class": "nsp-description"}):
-    desc = desc.string
-    descList.append(desc.replace("\n", ""))
-# scrape details
-# detailsList=[]
-# for details in soup.find_all("div", {"class": "nsp-details"}):
-#     details = details.text
-#     detailsList.append(details)
 
-detailsList=[]
-for details in soup.find_all("div", {"class": "nsp-details"}):
-    details = details.get_text(separator='\n')
-    details = details.replace('\n \n', '\n')
-    detailsList.append(details)
-#scrape the link to the movies description page on Lighthouse.ie
-linkList= []
-for link in soup.findAll("div", {"class": "nsp-poster"}):
-    linkText = link.find('a')['href']
-
-    linkList.append(linkText)
-
-#scrape to get the poster images
-imageList= []
-for image in soup.findAll("div", {"class": "nsp-poster"}):
-    imageLink = image.find('img')['src']
-#using replace() to allow me to scrape images that are in the lighthousecinema assets folder.
-    imageLink = imageLink.replace('/themes', 'https://www.lighthousecinema.ie/themes')
-    imageList.append(imageLink)
 
 #https://www.geeksforgeeks.org/python-using-for-loop-in-flask/  how to use for loop in python to html
 @app.route('/Lighthouse')
 def lighthouseScrape():
+    url = 'https://www.lighthousecinema.ie/films/'
+    html = urlopen(url).read()
+    soup = BeautifulSoup(html, features='html.parser')
+    # scrape movie titles
+    titleList = []
+    for title in soup.find_all("h3"):
+        title = title.string
+        titleList.append(title)
+    # scrape description
+    # https://stackoverflow.com/questions/31140143/how-to-add-space-around-removed-tags-in-beautifulsoup how to add space around scraped elements
+    descList = []
+    for desc in soup.findAll("div", {"class": "nsp-description"}):
+        desc = desc.string
+        descList.append(desc.replace("\n", ""))
+    # scrape details
+    # detailsList=[]
+    # for details in soup.find_all("div", {"class": "nsp-details"}):
+    #     details = details.text
+    #     detailsList.append(details)
+
+    detailsList = []
+    for details in soup.find_all("div", {"class": "nsp-details"}):
+        details = details.get_text(separator='\n')
+        details = details.replace('\n \n', '\n')
+        detailsList.append(details)
+    # scrape the link to the movies description page on Lighthouse.ie
+    linkList = []
+    for link in soup.findAll("div", {"class": "nsp-poster"}):
+        linkText = link.find('a')['href']
+
+        linkList.append(linkText)
+
+    # scrape to get the poster images
+    imageList = []
+    for image in soup.findAll("div", {"class": "nsp-poster"}):
+        imageLink = image.find('img')['src']
+        # using replace() to allow me to scrape images that are in the lighthousecinema assets folder.
+        imageLink = imageLink.replace('/themes', 'https://www.lighthousecinema.ie/themes')
+        imageList.append(imageLink)
+
     return render_template("scrape.html", titleList = titleList, descList = descList, detailsList = detailsList, linkList = linkList, imageList= imageList, zip = zip)
 
 if __name__ =='__main__':
