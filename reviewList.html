@@ -2,26 +2,141 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Reviews</title>
+
+    <style>
+
+*{
+    margin:0;
+}
+html, body{
+    height: 100%;
+}
+
+#wrapper{
+    float:left;
+    width: 100%;
+    min-height: 100%;
+    padding-bottom: 70px;
+    background-color:#d5dae8;
+    box-sizing: border-box;
+}
+
+#top-image-box{
+	float:left;
+	width:100%;
+	height:30vh;
+	text-align: center;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+#home{
+    float: left;
+    width:100%;
+    height:80px;
+    position: absolute;
+    padding-top: 60px;
+}
+#addbutton {
+    color: #dce1d6;
+    width: 250px;
+    background-color: #6b5b95;
+    font-size: 19px;
+    border: 1px solid #8a0505;
+    margin: 10px;
+    padding: 15px 50px;
+    cursor: pointer
+}
+#addbutton:hover {
+    color: #030e01;
+    background-color: #a2b9bc;
+}
+
+.filler{
+float: left;
+width: 20%;
+height: 100%;
+}
+
+body {
+    background-color:#d5dae8
+}
+footer{
+    float: left;
+    width:100%;
+    height:50px;
+    background: #5f70a6;
+    text-align: center;
+    color: #fff;
+    margin-top: -50px;
+    padding-top: -10px;
+    box-sizing: border-box;
+}
+	</style>
+
 </head>
-<body>
-<h2><a href="/home">Home</a></h2>
-<h1>The reviews</h1>
-<p>Movie Name</p>
-<p>Select a movie title to read the review</p>
-<!--ORIGINAL DB-->
+<!--<body>-->
+<!--<h2><a href="/home">Home</a></h2>-->
+<!--<h1>The reviews</h1>-->
+
+<!--<p>Select a movie title to read the review:</p><br>-->
+<!--&lt;!&ndash;ORIGINAL DB&ndash;&gt;-->
+<!--&lt;!&ndash;{% for movie in movies %}&ndash;&gt;-->
+<!--&lt;!&ndash;<p><a href="/data/{{movie.movie_id}}">{{movie.movie_name}} ({{movie.relyear}})</a></p>&ndash;&gt;-->
+<!--&lt;!&ndash;<hr>&ndash;&gt;-->
+<!--&lt;!&ndash;{% endfor %}&ndash;&gt;-->
+<!--&lt;!&ndash;    <a href="/data/addData"><button type="button" name="addButton">Add Review</button></a>&ndash;&gt;-->
+
+<!--&lt;!&ndash;NEW DB&ndash;&gt;-->
 <!--{% for movie in movies %}-->
-<!--<p><a href="/data/{{movie.movie_id}}">{{movie.movie_name}} ({{movie.relyear}})</a></p>-->
+<!--<p><a href="/data/{{movie.id}}">{{ movie.movie_name }} ({{ movie.relyear}})</a> review by : {{movie.signature}}</p>-->
 <!--<hr>-->
 <!--{% endfor %}-->
 <!--    <a href="/data/addData"><button type="button" name="addButton">Add Review</button></a>-->
 
-<!--NEW DB-->
-{% for movie in movies %}
-<p><a href="/data/{{movie.id}}">{{ movie.movie_name }} ({{ movie.relyear}})</a> review by : {{movie.signature}}</p>
-<hr>
-{% endfor %}
-    <a href="/data/addData"><button type="button" name="addButton">Add Review</button></a>
+<!--</body>-->
+
+
+<body>
+<!--<div style=" width; 100%; height:Auto; background-color:#a2b9bc; ; text-align:center;">-->
+<div id="wrapper">
+
+    <div id="top-image-box">
+
+        <header id="home">
+            <h1 style="font-size: 90px; color: grey">Movie Review Vault</h1>
+        </header>
+        <img src="https://media.bizj.us/view/img/11964600/gettyimages-1216803153*1200xx5184-2916-0-270.jpg" style="width : 100%; height : auto;">
+    </div>
+    <div style="width: 100%; height 50px; float: left: text align: left;">
+         <span><a href="/home">Home</a></span>
+        <span> <a href="/logout">Log Out</a></span>
+    </div>
+
+    <div style=" float: left; width:100%; height: 100%; background-color:#d5dae8; text-align:center;">
+
+
+        <h1>The reviews</h1>
+
+        <p>Select a movie title to read the review:</p><br>
+
+        {% for movie in movies %}
+            <p><a href="/data/{{movie.id}}">{{ movie.movie_name }} ({{ movie.relyear}})</a> review by : {{movie.signature}}</p><br>
+            <hr>
+            <br>
+        {% endfor %}
+            <a href="/data/addData"><button type="button" name="addButton" id="addbutton">Add Review</button></a>
+
+
+    </div>
+
+
+</div>
+<footer>
+	<p>Movie Review Vault by John Murphy | &copy; 2022</p>
+
+</footer>
 
 </body>
+
 </html>
