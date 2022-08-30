@@ -43,6 +43,7 @@ html, body{
     background-color: #6b5b95;
     font-size: 19px;
     border: 1px solid #8a0505;
+    border-radius: 10px;
     margin: 10px;
     padding: 15px 50px;
     cursor: pointer
@@ -130,14 +131,15 @@ footer{
 
     </div>
 
-    <div style=" float: left; width:70%; height: 100%; background-color:#d5dae8; border-radius: 25px; background-color: #F3F8F2; margin-top: 30px; padding: 20px;box-sizing: border-box;">
+    <div style=" float: left; width:70%; height: 100%; border-radius: 25px; background-color: #F3F8F2; margin-top: 30px; padding: 20px;box-sizing: border-box;">
 
 
             <p class="info">{{movie.description}}</p>
 
     </div>
     <div style="float: left; width: 100%; margin: 50px 0px 0px 0px; text-align: center;">
-          <a href="/delete/{{movie.id}}"><button type="button" name="delButton" id="delbutton">Delete Review</button></a>
+        <a href="/reviewlist"><button type="button" name="delButton" id="delbutton">All Reviews</button></a>
+        <a href="/delete/{{movie.id}}"><button type="button" name="delButton" id="delbutton">Delete Review</button></a>
     </div>
 
 
