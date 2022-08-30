@@ -3,27 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <title>Delete Page</title>
-</head>
+
+ <style>
+
+*{
+    margin:0;
+}
+html, body{
+    height: 100%;
+}
+
+#wrapper{
+    float:left;
+    width: 100%;
+    min-height: 100%;
+    padding-bottom: 70px;
+    background-color:#d5dae8;
+    box-sizing: border-box;
+}
+
+#top-image-box{
+	float:left;
+	width:100%;
+	height:30vh;
+	text-align: center;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+#home{
+    float: left;
+    width:100%;
+    height:80px;
+    position: absolute;
+    padding-top: 60px;
+}
+#delbutton {
+    color: #dce1d6;
+    width: 250px;
+    background-color: #6b5b95;
+    font-size: 19px;
+    border: 1px solid #8a0505;
+    margin: 10px;
+    padding: 15px 50px;
+    cursor: pointer
+}
+#delbutton:hover {
+    color: #030e01;
+    background-color: #a2b9bc;
+}
+
+.info{
+font-size: 24px;
+
+}
+
+body {
+    background-color:#d5dae8
+}
+footer{
+    float: left;
+    width:100%;
+    height:50px;
+    background: #5f70a6;
+    text-align: center;
+    color: #fff;
+    margin-top: -50px;
+    padding-top: -10px;
+    box-sizing: border-box;
+}
+	</style>
+
+
+
+<!--</head>-->
+<!--<body>-->
+
+<!--<form action='' method="post">-->
+<!--    <p>Are you sure you want to delete this review of {{movie.movie_name}} ?</p>-->
+
+
+<!--<p>Movie ID</p>-->
+<!--<p>{{movie.movie_id}}</p><hr>-->
+<!--<p>Movie Name</p>-->
+<!--<p>{{movie.movie_name}}</p><hr>-->
+<!--<p>Release Year</p>-->
+<!--<p>{{movie.relyear}}</p><hr>-->
+<!--<p>Genre</p>-->
+<!--<p>{{movie.genre}}</p><hr>-->
+<!--<p>Review</p>-->
+<!--<p>{{movie.description}}</p><hr>-->
+<!--    <input type = "submit" value="YES">-->
+<!--    <input type = "" value="Cancel">-->
+<!--    <a href='/reviewlist'>Cancel</a>-->
+<!--</form>-->
+
+<!--</body>-->
+
+
 <body>
+<!--<div style=" width; 100%; height:Auto; background-color:#a2b9bc; ; text-align:center;">-->
+<div id="wrapper">
 
-<form action='' method="post">
-    <p>Are you sure you want to delete this review of {{movie.movie_name}} ?</p>
+    <div id="top-image-box">
+
+        <header id="home">
+            <h1 style="font-size: 90px; color: grey">Movie Review Vault</h1>
+        </header>
+        <img src="https://media.bizj.us/view/img/11964600/gettyimages-1216803153*1200xx5184-2916-0-270.jpg" style="width : 100%; height : auto;">
+    </div>
+    <div style="width: 100%; height 50px; float: left: text align: left;">
+         <span><a href="/home">Home</a></span>
+        <span> <a href="/logout">Log Out</a></span>
+    </div>
+
+    <div style=" float: left; width:30%; height: 100%; border-radius: 25px; margin-top: 30px; padding: 20px; text-align: center; min-height: 30%; font-size: 20px; box-sizing: border-box;">
 
 
-<p>Movie ID</p>
-<p>{{movie.movie_id}}</p><hr>
-<p>Movie Name</p>
-<p>{{movie.movie_name}}</p><hr>
-<p>Release Year</p>
-<p>{{movie.relyear}}</p><hr>
-<p>Genre</p>
-<p>{{movie.genre}}</p><hr>
-<p>Review</p>
-<p>{{movie.description}}</p><hr>
-    <input type = "submit" value="YES">
-    <input type = "" value="Cancel">
-    <a href='/reviewlist'>Cancel</a>
-</form>
+                <p>Are you sure you want to delete this review of {{movie.movie_name}} ?</p><br>
+                <input type = "submit" value="YES">
+<!--                <input type = "" value="Cancel" >-->
+<!--                <button><a href='/reviewlist'><input type = "" value="Cancel" ></a></button>-->
+                <button name="cancel" type="" value="Cancel"><a href='/reviewlist'>Cancel</a></button>
+
+
+
+
+    </div>
+
+    <div style=" float: left; width:70%; height: 100%; background-color:#d5dae8; border-radius: 25px; background-color: #F3F8F2; margin-top: 30px; padding: 20px; font-size: 20px; box-sizing: border-box;">
+
+
+            <form action='' method="post">
+
+
+
+
+                <p><u>Movie Name:</u></p>
+                <p>{{movie.movie_name}}</p><hr><br>
+                <p><u>Release Year:</u></p>
+                <p>{{movie.relyear}}</p><hr><br>
+                <p><u>Genre:</u></p>
+                <p>{{movie.genre}}</p><hr><br>
+                <p><u>Review:</u></p>
+                <p>{{movie.description}}</p><br>
+
+            </form>
+
+    </div>
+    <div style="float: left; width: 100%; margin: 50px 0px 0px 0px; text-align: center;">
+          <a href="/delete/{{movie.id}}"><button type="button" name="delButton" id="delbutton">Delete Review</button></a>
+    </div>
+
+
+</div>
+<footer>
+	<p>Movie Review Vault by John Murphy | &copy; 2022</p>
+
+</footer>
 
 </body>
+
+
 </html>
