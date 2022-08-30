@@ -51,7 +51,7 @@ def Login():
                 session['logged_in'] = True
                 return redirect('/home')
             else:
-                return 'Incorrect Login Details'
+                return 'Incorrect Login Details, Please Go Back'
         except:
             return "Incorrect Login"
 
