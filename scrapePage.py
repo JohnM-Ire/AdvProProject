@@ -13,32 +13,39 @@ for title in soup.find_all("h3"):
     title = title.string
     #print(title)
     titleList.append(title)
-tnum = 1
-for t in titleList:
-    # print(tnum, ": ", t)
-    tnum = tnum+1
+
 
 #print(titleList)
 linkList= []
 for link in soup.findAll("td", {"class": "nsp-poster"}):
     linkText = link.find('a')['href']
     linkList.append(linkText)
-lnum = 1
-for l in linkList:
-    # print(lnum, ": ", l)
-    lnum = lnum+1
 
 
 
+fullDescription= []
+# for movlink in linkList:
+url = 'https://www.lighthousecinema.ie/film/donnie-darko'
+html = urlopen(url).read()
+soup = BeautifulSoup(html, features='html.parser')
 
-descList = []
-for desc in soup.findAll("div", {"class": "nsp-description"}):
-    desc = desc.string
-    descList.append(desc.replace("\n", ""))
-num = 1;
-for d in descList:
-    #print(num, ": ", d)
-    num = num+1
+for fulldesc in soup.findAll("div", {"class": "synopsis"}):
+    fulldesc = fulldesc.text
+    fullDescription.append(fulldesc)
+
+print(fullDescription)
+
+# for movTitle, titleDesc in zip(titleList, fullDescription):
+#     print(movTitle, titleDesc)
+
+# descList = []
+# for desc in soup.findAll("div", {"class": "nsp-description"}):
+#     desc = desc.string
+#     descList.append(desc.replace("\n", ""))
+# num = 1;
+# for d in descList:
+#     #print(num, ": ", d)
+#     num = num+1
 #print(descList)
 # print(len(descList))
 
@@ -50,11 +57,11 @@ for d in descList:
 #     #print(day)
 #     daylist.append(day.replace("\n", "  "))
 # print(daylist)
-detailsList=[]
-for details in soup.find_all("div", {"class": "nsp-details"}):
-    details = details.get_text(separator='\n')
-    details = details.replace('\n \n', '\n')
-    detailsList.append(details)
+# detailsList=[]
+# for details in soup.find_all("div", {"class": "nsp-details"}):
+#     details = details.get_text(separator='\n')
+#     details = details.replace('\n \n', '\n')
+#     detailsList.append(details)
 #print(detailsList)
 # dlnum = 1
 #for dl in detailsList:
@@ -69,10 +76,10 @@ for details in soup.find_all("div", {"class": "nsp-details"}):
 
 # for (movTitle, movDetails, movDesc) in zip(titleList, detailsList, descList ):
 #     print(f"Title: {movTitle}\n{movDetails}\nMovie Description: {movDesc}")
-imageList= []
-for image in soup.findAll("div", {"class": "nsp-poster"}):
-    imageLink = image.find('img')['src']
-    imageLink = imageLink.replace('/themes', 'https://www.lighthousecinema.ie/themes')
-    imageList.append(imageLink)
+# imageList= []
+# for image in soup.findAll("div", {"class": "nsp-poster"}):
+#     imageLink = image.find('img')['src']
+#     imageLink = imageLink.replace('/themes', 'https://www.lighthousecinema.ie/themes')
+#     imageList.append(imageLink)
 
-print(imageList)
+#print(imageList)
