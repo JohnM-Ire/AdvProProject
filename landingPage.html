@@ -106,14 +106,16 @@ footer{
             {% if session['logged_in'] %}
                 <p>You are logged in already!</p>
             {% else %}
+
                 <h1 style="margin-bottom: 30px;">Welcome to the Movie Review Vault</h1>
-                  <form  action='/' method = "POST" >
+
+                  <form id="loginForm"  action='/' method = "POST" >
                       <table style="margin:0 auto;">
-                          <tr><td>Username</td><td><input type = "text" name = "username"></td></tr>
+                          <tr><td>Username</td><td><input type = "text" id="login_field" name = "username"></td></tr>
                           <tr><td><p> </p></td><td><p> </p></td></tr>
-                          <tr><td>Password</td><td><input type = "text" name = "password"></td></tr>
+                          <tr><td>Password</td><td><input type = "text"  name = "password"></td></tr>
                       </table><br>
-                      <input type = "submit" value = "Log-in">
+                      <input type = "submit" value = "Log-in" id="loginSubmit">
                 </form>
             {% endif %}
 
@@ -128,7 +130,7 @@ footer{
 	<p>Movie Review Vault by John Murphy | &copy; 2022</p>
 
 </footer>
-
+<script type="text/javascript" src="C:\Users\johna\OneDrive\Desktop\AdvancedProgramming\johnCA10583435\Scripts\jsMain.js"></script>
 </body>
 
 

@@ -94,7 +94,7 @@ footer{
        {% for user in users %}
 
         <p class="info">Username:<b> {{ user.username }} </b></p><br><p class="info">Password:<b> {{ user.password }} </b></p>
-    <a href="/delete/{{user.username}}"><button type="button" name="delUserButton" >Delete User</button></a><br>
+    <a href="/deluser/{{user.user_id}}"><button type="button" name="delUserButton" >Delete User</button></a><br>
             <hr>
             <br>
 {% endfor %}
