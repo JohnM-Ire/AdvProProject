@@ -1,42 +1,42 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import itertools
-
-url = 'https://www.lighthousecinema.ie/films/'
-html = urlopen(url).read()
-soup = BeautifulSoup(html, features='html.parser')
-
-#print(soup)
-
-titleList = []
-for title in soup.find_all("h3"):
-    title = title.string
-    #print(title)
-    titleList.append(title)
-
-
-#print(titleList)
-linkList= []
-for link in soup.findAll("td", {"class": "nsp-poster"}):
-    linkText = link.find('a')['href']
-    linkList.append(linkText)
-
-
-
-fullDescription= []
-# for movlink in linkList:
-url = 'https://www.lighthousecinema.ie/film/donnie-darko'
-html = urlopen(url).read()
-soup = BeautifulSoup(html, features='html.parser')
-
-for fulldesc in soup.findAll("div", {"class": "synopsis"}):
-    fulldesc = fulldesc.text
-    fullDescription.append(fulldesc)
-
-print(fullDescription)
-
-# for movTitle, titleDesc in zip(titleList, fullDescription):
-#     print(movTitle, titleDesc)
+#
+# url = 'https://www.lighthousecinema.ie/films/'
+# html = urlopen(url).read()
+# soup = BeautifulSoup(html, features='html.parser')
+#
+# #print(soup)
+#
+# titleList = []
+# for title in soup.find_all("h3"):
+#     title = title.string
+#     #print(title)
+#     titleList.append(title)
+#
+#
+# #print(titleList)
+# linkList= []
+# for link in soup.findAll("td", {"class": "nsp-poster"}):
+#     linkText = link.find('a')['href']
+#     linkList.append(linkText)
+#
+#
+#
+# fullDescription= []
+# # for movlink in linkList:
+# url = 'https://www.lighthousecinema.ie/film/donnie-darko'
+# html = urlopen(url).read()
+# soup = BeautifulSoup(html, features='html.parser')
+#
+# for fulldesc in soup.findAll("div", {"class": "synopsis"}):
+#     fulldesc = fulldesc.text
+#     fullDescription.append(fulldesc)
+#
+# #print(fullDescription)
+#
+# # for movTitle, titleDesc in zip(titleList, fullDescription):
+# #     print(movTitle, titleDesc)
 
 # descList = []
 # for desc in soup.findAll("div", {"class": "nsp-description"}):
@@ -83,3 +83,18 @@ print(fullDescription)
 #     imageList.append(imageLink)
 
 #print(imageList)
+
+url = 'https://www.lighthousecinema.ie/films/'
+html = urlopen(url).read()
+soup = BeautifulSoup(html, features='html.parser')
+# scrape movie titles
+titleList = []
+for title in soup.find_all("h3"):
+    title = title.string
+    titleList.append(title)
+# scrape description
+# https://stackoverflow.com/questions/31140143/how-to-add-space-around-removed-tags-in-beautifulsoup how to add space around scraped elements
+descList = []
+for desc in soup.find_all("div", {"class": "nsp-description"}):
+    desc = desc.string
+    descList.append(desc.replace("\n", ""))

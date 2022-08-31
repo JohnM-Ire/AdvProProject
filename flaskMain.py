@@ -9,6 +9,8 @@ import itertools
 import jinja2
 
 app = Flask(__name__)
+#taken from (some elements) 'https://www.askpython.com/python-modules/flask/flask-crud-application'
+#taken from (some elements) 'https://medium.com/analytics-vidhya/creating-login-page-on-flask-9d20738d9f42'
 app.config['SECRET_KEY'] = "JohnKey"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jMovie.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -20,22 +22,12 @@ def create_table():
     db.create_all()
     newdb.create_all()
 
-#@app.route('/')
-# #Alt Login method to see if this works better
-# @app.route('/login', methods= ['POST'])
-# def login():
-#     if request.form['password'] == 'password' and request.form['username'] == 'admin':
-#         session['logged_in'] = True
-#
-#     else:
-#         flash('incorrect password entered')
-#         return login()
-
-
 
 @app.route('/', methods= ['POST', 'GET'])
 # def landPage():
 #     return render_template('landingPage.html')
+#taken from (some elements) 'https://iq.opengenus.org/login-page-in-flask/'
+#taken from (some elements) 'https://medium.com/@shrimantshubham/flask-sqlalchemy-tutorial-login-system-with-python-61a3ab9f4990'
 def Login():
     if request.method == 'GET':
         return render_template('landingPage.html')
@@ -43,11 +35,11 @@ def Login():
         name = request.form['username']
         passw = request.form['password']
         try:
-            attempt = UserModel.query.filter_by(username=name, password=passw).first()
-            if attempt is not None and name == "JohnM89" and passw =="ozzyozzy":
+            attemptLogIn = UserModel.query.filter_by(username=name, password=passw).first()
+            if attemptLogIn is not None and name == "JohnM89" and passw =="ozzyozzy":
                 session['logged_in'] = True
                 return redirect('/homeAdmin')
-            elif attempt is not None:
+            elif attemptLogIn is not None:
                 session['logged_in'] = True
                 return redirect('/home')
             else:
@@ -77,11 +69,14 @@ def signUp():
 
 @app.route('/homeAdmin')
 def adminHomePage():
+#taken from 'https://www.digitalocean.com/community/tutorials/how-to-use-flask-sqlalchemy-to-interact-with-databases-in-a-flask-application#step-3-displaying-all-records'
     users = UserModel.query.all()
     return render_template('homeAdmin.html', users= users)
 
 @app.route('/home')
 def homePage():
+# taken from 'https://www.digitalocean.com/community/tutorials/how-to-use-flask-sqlalchemy-to-interact-with-databases-in-a-flask-application#step-3-displaying-all-records'
+
     users = UserModel.query.all()
     return render_template('homePage.html', users= users)
 
@@ -89,7 +84,7 @@ def homePage():
 def searchMovies():
     if request.method == 'GET':
         return render_template('search.html')
-
+    # Taken from (some elements) 'https://www.youtube.com/watch?v=lOzyQgv71_4'
     if request.method == 'POST':
         usersearchTerm = request.form['searchTerm']
         searchTerm = usersearchTerm.replace(' ', '+')
@@ -99,6 +94,7 @@ def searchMovies():
 
         searchresultsList = []
         for results in soup.find_all("td", {"class": "result_text"}, limit=20):
+            #Taken from 'https://stackoverflow.com/questions/16118598/how-to-display-text-only-using-find-all-in-beautiful-soup'
             results = results.text
             searchresultsList.append(results)
         numresults = len(searchresultsList)
@@ -119,7 +115,7 @@ def searchMovies():
                 if genre != "Back to top":
                     genreList.append(genre)
         genreList = list(zip(*[iter(genreList)] * 3))
-
+        #taken from 'https://stackoverflow.com/questions/62029141/cant-use-zip-from-jinja2'
         return render_template('searchResults.html',usersearchTerm = usersearchTerm, searchTerm = searchTerm,numresults= numresults,  searchresultsList = searchresultsList, searchlinkList = searchlinkList, genreList = genreList, zip = zip)
 
 
@@ -134,19 +130,6 @@ def searchResult():
 def addDetails():
     if request.method == 'GET':
         return render_template('addpage.html')
-#Original MovieDB
-    # if request.method == 'POST':
-    #     id = request.form['id']
-    #     movie_id = request.form['movie_id']
-    #     movie_name = request.form['movie_name']
-    #     relyear = request.form['relyear']
-    #     # genre = request.form['genre']
-    #     description = request.form['description']
-    #     movie = MovieModel(id=id, movie_id=movie_id, movie_name=movie_name, relyear=relyear, description=description)
-    #
-    #     db.session.add(movie)
-    #     db.session.commit()
-    #     return redirect('/reviewlist')
 
 #NewMovieDB
     if request.method == 'POST':
@@ -175,14 +158,6 @@ def RetrieveReviewList():
 def retrieveUsers():
     users = UserModel.query.all()
     return render_template('usersPage.html' , users = users)
-
-    # ORIGINAL DB
-# @app.route('/data/<int:movie_id>')
-# def RetrieveSingleReview(movie_id):
-    # movie = MovieModel.query.filter_by(movie_id=movie_id).first()
-    # if movie:
-    #     return render_template('data.html', movie = movie)
-    # return f"No Movie review with id {id} in Reviews"
 
     #NEW DATABASE
 @app.route('/data/<int:id>')
@@ -215,9 +190,9 @@ def DeleteSingleReview(id):
 
     return render_template('deleteMovie.html', movie = movie)
 
-@app.route('/delete/<string:username>', methods=['GET', 'POST'])
-def DeleteSingleUser(username):
-    user = UserModel.query.filter_by(username=username).first()
+@app.route('/deluser/<int:user_id>', methods=['GET', 'POST'])
+def DeleteSingleUser(user_id):
+    user = UserModel.query.filter_by(user_id=user_id).first()
     if request.method == 'POST':
         if user:
             userdb.session.delete(user)
@@ -226,17 +201,16 @@ def DeleteSingleUser(username):
 
     return render_template('deleteUser.html', user = user)
 #Code to scrape LightHouse.ie and create lists of Movie Title, Movie Description and Movie Details:
-
-
-
 #https://www.geeksforgeeks.org/python-using-for-loop-in-flask/  how to use for loop in python to html
 @app.route('/Lighthouse')
 def lighthouseScrape():
+
     url = 'https://www.lighthousecinema.ie/films/'
     html = urlopen(url).read()
     soup = BeautifulSoup(html, features='html.parser')
     # scrape movie titles
     titleList = []
+    # Taken from 'https://stackoverflow.com/questions/16118598/how-to-display-text-only-using-find-all-in-beautiful-soup'
     for title in soup.find_all("h3"):
         title = title.string
         titleList.append(title)
@@ -246,11 +220,8 @@ def lighthouseScrape():
     for desc in soup.findAll("div", {"class": "nsp-description"}):
         desc = desc.string
         descList.append(desc.replace("\n", ""))
-    # scrape details
-    # detailsList=[]
-    # for details in soup.find_all("div", {"class": "nsp-details"}):
-    #     details = details.text
-    #     detailsList.append(details)
+        #descList.append(desc)
+
 
     detailsList = []
     for details in soup.find_all("div", {"class": "nsp-details"}):

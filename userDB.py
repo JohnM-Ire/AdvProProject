@@ -5,7 +5,8 @@ userdb = SQLAlchemy()
 class UserModel(userdb.Model):
     __tablename__ = "usertable"
 
-    username = userdb.Column(userdb.String, primary_key= True, unique = True)
+    user_id =  userdb.Column(userdb.Integer, primary_key= True, unique = True, autoincrement=True)
+    username = userdb.Column(userdb.String, unique = True)
     password = userdb.Column(userdb.String())
 
     def __init__(self, username, password):
