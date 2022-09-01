@@ -24,8 +24,7 @@ def create_table():
 
 
 @app.route('/', methods= ['POST', 'GET'])
-# def landPage():
-#     return render_template('landingPage.html')
+
 #taken from (some elements) 'https://iq.opengenus.org/login-page-in-flask/'
 #taken from (some elements) 'https://medium.com/@shrimantshubham/flask-sqlalchemy-tutorial-login-system-with-python-61a3ab9f4990'
 def Login():
@@ -54,7 +53,7 @@ def logoutUser():
 
 @app.route('/signUp', methods= ['GET', 'POST'])
 def signUp():
-
+#Elements taken from: 'https://stackoverflow.com/questions/42154602/how-to-get-form-data-in-flask'
     if request.method == 'GET':
         return render_template('signUp.html')
 
@@ -63,9 +62,10 @@ def signUp():
         password = request.form['password']
 
         user = UserModel(username=username, password=password)
+        #taken from 'https://stackoverflow.com/questions/19388555/sqlalchemy-session-add-return-value'
         userdb.session.add(user)
         userdb.session.commit()
-        return redirect('/home')
+        return redirect('/')
 
 @app.route('/homeAdmin')
 def adminHomePage():
@@ -114,8 +114,9 @@ def searchMovies():
                 genre = genre.string
                 if genre != "Back to top":
                     genreList.append(genre)
+        #taken from 'https://stackoverflow.com/questions/44104729/grouping-every-three-items-together-in-list-python'
         genreList = list(zip(*[iter(genreList)] * 3))
-        #taken from 'https://stackoverflow.com/questions/62029141/cant-use-zip-from-jinja2'
+
         return render_template('searchResults.html',usersearchTerm = usersearchTerm, searchTerm = searchTerm,numresults= numresults,  searchresultsList = searchresultsList, searchlinkList = searchlinkList, genreList = genreList, zip = zip)
 
 
@@ -139,7 +140,7 @@ def addDetails():
         signature = request.form['signature']
         description = request.form['description']
         newmovie = newMovieModel(movie_name=movie_name, relyear=relyear, genre=genre, signature=signature, description=description)
-
+        #taken from 'https://stackoverflow.com/questions/19388555/sqlalchemy-session-add-return-value'
         newdb.session.add(newmovie)
         newdb.session.commit()
         return redirect('/reviewlist')
@@ -167,16 +168,6 @@ def RetrieveSingleReview(id):
         return render_template('data.html', movie = movie)
     return f"No Movie review with id {id} in Reviews"
 
-
-#ORIGINAL MOVIE DATABASE
-# @app.route('/delete/<int:movie_id>', methods=['GET', 'POST'])
-# def DeleteSingleReview(movie_id):
-    # movie = MovieModel.query.filter_by(movie_id=movie_id).first()
-    # if request.method == 'POST':
-    #     if movie:
-    #         db.session.delete(movie)
-    #         db.session.commit()
-    #         return redirect('/reviewlist')
 
 #NEW UPDATED DATABASE
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
