@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-
+#taken from 'https://www.askpython.com/python-modules/flask/flask-crud-application'
 userdb = SQLAlchemy()
 
 class UserModel(userdb.Model):

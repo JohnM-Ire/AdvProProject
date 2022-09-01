@@ -127,7 +127,7 @@ def searchResult():
     if request.method == 'GET':
         return render_template('searchResults.html')
 
-
+#taken from 'https://www.askpython.com/python-modules/flask/flask-crud-application'
 #to take the user input and post the details to our database
 @app.route('/data/addData', methods= ['GET', 'POST'])
 def addDetails():
@@ -165,7 +165,7 @@ def retrieveUsers():
     users = UserModel.query.all()
     return render_template('usersPage.html' , users = users)
 
-    #NEW DATABASE
+
 @app.route('/data/<int:id>')
 def RetrieveSingleReview(id):
     movie = newMovieModel.query.filter_by(id=id).first()
@@ -174,7 +174,7 @@ def RetrieveSingleReview(id):
     return f"No Movie review with id {id} in Reviews"
 
 
-#NEW UPDATED DATABASE
+
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 def DeleteSingleReview(id):
     movie = newMovieModel.query.filter_by(id=id).first()

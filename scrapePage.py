@@ -2,18 +2,28 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import itertools
 #
-# url = 'https://www.lighthousecinema.ie/films/'
-# html = urlopen(url).read()
-# soup = BeautifulSoup(html, features='html.parser')
-#
+url = 'https://www.lighthousecinema.ie/films/'
+html = urlopen(url).read()
+soup = BeautifulSoup(html, features='html.parser')
+
 # #print(soup)
 #
-# titleList = []
-# for title in soup.find_all("h3"):
-#     title = title.string
-#     #print(title)
-#     titleList.append(title)
-#
+titleList = []
+movpageList=[]
+fulldesc=[]
+for title in soup.find_all("h3"):
+    title = title.string
+    #print(title)
+    titleList.append(title)
+
+for t in titleList:
+
+    movpage = t.replace(" ", "-")
+    movpage = movpage.lower()
+    url = 'https://www.lighthousecinema.ie/film/'+ movpage
+    for full in soup.findAll("div", {"class": "synopsis off"}):
+        print(full)
+
 #
 # #print(titleList)
 # linkList= []
