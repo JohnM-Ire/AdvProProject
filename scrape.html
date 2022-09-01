@@ -94,7 +94,8 @@ footer{
     <h2><a href="https://www.lighthousecinema.ie/"> Lighthouse Cinema Films and Events</a></h2>
     <p>Current and Upcoming Films and Events at Lighthouse Cinema Smithfield</p>
 </div>
-<!--https://www.geeksforgeeks.org/python-using-for-loop-in-flask/  how to use for loop in python to html-->
+<!--        taken from 'https://stackoverflow.com/questions/62029141/cant-use-zip-from-jinja2'-->
+<!--    taken from 'https://stackoverflow.com/questions/49783594/for-loop-and-zip-in-python'-->
 {% for (movTitle, movDetails, movDesc, linkhtml, image) in zip(titleList, detailsList, descList, linkList, imageList) %}
 <div style="float : left; width: 25%; height : 250px; background-color : #d5dae8; padding-bottom: 15px; box-sizing: border-box ">
         <a href="{{ linkhtml }}"><img src="{{ image }}"
