@@ -92,9 +92,11 @@ footer{
     </div>
 
     <div style="width:100%;height: 100%; float: left; background-color:#d5dae8; padding-top: 1%; text-align: center;">
+<!--        taken from 'https://stackoverflow.com/questions/49783594/for-loop-and-zip-in-python'-->
         <h2> {{ numresults }} result(s) for '{{ usersearchTerm }}'</h2><br>
          <a href="/search"><button type="button" name="searchLink">New Search</button></a>
         <div style="height: 80%; width: 60%; background-color: white; margin:3% auto; padding: 20px; border-radius: 20px;">
+
             {% for (result, link, genre) in zip(searchresultsList, searchlinkList, genreList) %}
                 <p style="font-size: 20px;"><a style="text-decoration: none; font-color: black;" href="{{ link }} " target="_blank"><b>{{ result }}</b></a>, -  {{ genre }}</p><br><hr><br>
             {% endfor %}
