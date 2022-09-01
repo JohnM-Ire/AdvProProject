@@ -60,12 +60,14 @@ def signUp():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-
-        user = UserModel(username=username, password=password)
+        if username == "" or password == "":
+            return 'Please go back and enter values for both Username and Password '
+        else:
+            user = UserModel(username=username, password=password)
         #taken from 'https://stackoverflow.com/questions/19388555/sqlalchemy-session-add-return-value'
-        userdb.session.add(user)
-        userdb.session.commit()
-        return redirect('/')
+            userdb.session.add(user)
+            userdb.session.commit()
+            return redirect('/')
 
 @app.route('/homeAdmin')
 def adminHomePage():
@@ -139,11 +141,14 @@ def addDetails():
         genre = request.form['genre']
         signature = request.form['signature']
         description = request.form['description']
-        newmovie = newMovieModel(movie_name=movie_name, relyear=relyear, genre=genre, signature=signature, description=description)
+        if movie_name == "" or relyear == "" or genre == "" or signature == "" or description == "":
+            return 'Please go back and enter values for all fields to submit a review'
+        else:
+            newmovie = newMovieModel(movie_name=movie_name, relyear=relyear, genre=genre, signature=signature, description=description)
         #taken from 'https://stackoverflow.com/questions/19388555/sqlalchemy-session-add-return-value'
-        newdb.session.add(newmovie)
-        newdb.session.commit()
-        return redirect('/reviewlist')
+            newdb.session.add(newmovie)
+            newdb.session.commit()
+            return redirect('/reviewlist')
 
 @app.route('/reviewlist')
 def RetrieveReviewList():
