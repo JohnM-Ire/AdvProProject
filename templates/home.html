@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Ticket Home</title>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/ttStyle.css') }}">
+</head>
+
+<body>
+
+<div id="wrapper">
+
+	<header id="head-home">
+		<ul class="nav-links">
+			<a href="/">
+				<li id="header-links" class="link-buttons">Home</li>
+			</a>
+			<a href="/opentickets">
+				<li id="header-links" class="link-buttons">View Tickets</li>
+			</a>
+			<a href="/teams">
+				<li id="header-links" class="link-buttons">View Teams</li>
+			</a>
+			<a href="/admin_data">
+				<li id="header-links" class="link-buttons">Admin</li>
+			</a>
+			<a href="/logout">
+			<li id="header-links"class="link-buttons">Log Out</li>
+			</a>
+		</ul>
+	</header>
+			<h1>Welcome {{ username }}</h1>
+
+	<div id="home-left-outer">
+		<h3 class="enquiry-h3">Tickets</h3>
+		<hr class="enquiry-hr">
+		<hr class="enquiry-hr">
+		<div id="home-left-inner">
+			<a href="/opentickets"><h3  class="enquiry-h3">Open Tickets</h3></a>
+			 {% for openticket in openTickets %}
+
+    	<a href="/ticket/{{ openticket.ticket_id }}">
+		<table id="hometable">
+			<tr id="tableheader">
+				<td>Ticket Number</td>
+				<td>Priority</td>
+				<td>Ticket State</td>
+				<td>Assigned to Team</td>
+				<td id="tdlarge">Summary</td>
+			</tr>
+			<tr>
+				<td>{{ openticket.ticket_id }}</td>
+				<td> {{ openticket.priority }}</td>
+				<td>{{ openticket.state }}</td>
+				<td>{{ openticket.team_name }}</td>
+				<td id="tdlarge">{{ openticket.summary }}</td>
+			</tr>
+		</table>
+
+    {% endfor %}
+			<br><a href="/opentickets"><p style="text-align: center;">Currently {{ openTicketsCount }} Open Tickets</p></a>
+
+		</div>
+				<div id="home-left-inner">
+				<a href="/opentickets#anchor_progress"><h3  class="enquiry-h3">In Progress Tickets</h3></a>
+				{% for progTicket in progTickets %}
+		        <a href="/ticket/{{ progTicket.ticket_id }}">
+		<table id="hometable">
+
+			<tr id="tableheader">
+				<td>Ticket Number</td>
+				<td>Priority</td>
+				<td>Ticket State</td>
+				<td>Assigned to Team</td>
+				<td id="tdlarge">Summary</td>
+			</tr>
+
+			<tr>
+				<td>{{ progTicket.ticket_id }}</td>
+				<td> {{ progTicket.priority }}</td>
+				<td>{{ progTicket.state }}</td>
+				<td>{{ progTicket.team_name }}</td>
+				<td id="tdlarge">{{ progTicket.summary }}</td>
+			</tr>
+		</table>
+				</a>
+
+  			{% endfor %}
+					<br><a href="/opentickets#anchor_progress"><p style="text-align: center;">Currently {{ progTicketsCount }} in progress tickets</p></a>
+		</div>
+				<div id="home-left-inner">
+					<h3 class="enquiry-h3">Waiting Tickets</h3>
+					      {% for waitTicket in waitTickets %}
+        <a href="/ticket/{{ waitTicket.ticket_id }}">
+		<table id="hometable">
+			<tr id="tableheader">
+				<td>Ticket Number</td>
+				<td>Priority</td>
+				<td>Ticket State</td>
+				<td>Assigned to Team</td>
+				<td id="tdlarge">Summary</td>
+			</tr>
+			<tr>
+				<td>{{ waitTicket.ticket_id }}</td>
+				<td> {{ waitTicket.priority }}</td>
+				<td>{{ waitTicket.state }}</td>
+				<td>{{ waitTicket.team_name }}</td>
+				<td id="tdlarge">{{ waitTicket.summary }}</td>
+			</tr>
+		</table>
+		</a>
+
+    {% endfor %}
+
+				<br><p style="text-align: center;">Currently {{ waitTicketsCount }} in Waiting tickets</p>
+		</div>
+	</div>
+
+
+	<div id="home-right-outer">
+		<h3 class="enquiry-h3">Other Functions</h3>
+		<hr class="enquiry-hr">
+		<hr class="enquiry-hr">
+
+		<div id="home-right-box_holder">
+			<div id = "home_num_1" class = "home-numbox">
+				<p class="large_num">{{ openTicketsCount }}</p>
+				<div id = "home_text_1" class = "home-textbox">
+					<p class ="small_text">Open Tickets</p>
+				</div>
+			</div>
+
+			<div id = "home_num_2" class = "home-numbox">
+				<p class="large_num">{{ progTicketsCount }}</p>
+				<div id = "home_text_2" class = "home-textbox">
+					<p class ="small_text">In Progress Tickets</p>
+				</div>
+			</div>
+
+			<div id = "home_num_3" class = "home-numbox">
+				<p class="large_num">{{ waitTicketsCount }}</p>
+				<div id = "home_text_3" class = "home-textbox">
+					<p class ="small_text">Waiting Tickets</p>
+				</div>
+			</div>
+		</div>
+
+		<div id="home-right-inner">
+			<div class="home-right-rect">
+				<a href="/newticket"><p>Create a New Ticket</p></a>
+			</div>
+			<div class="home-right-rect">
+				<a href="/teams"><p>Contact a Team</p></a>
+			</div>
+			<div class="home-right-rect">
+				<a href="/teamchat"><p>Your Team Chat</p></a>
+			</div>
+			<div class="home-right-rect">
+				<a href="/opentickets#anchor_myTickets"><p>My Tickets</p></a>
+			</div>
+
+			<div id="home-link-holder">
+				<a href="" class="home-link"><p>Link to Somewhere >></p></a>
+				<a href="" class="home-link" target="_blank"><p>Link to Somewhere >></p></a>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<footer>
+	<p>John Murphy | &copy; 2022</p>
+
+</footer>
+
+
+</body>
+
+
+</html>

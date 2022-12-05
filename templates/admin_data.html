@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/ttStyle.css') }}">
+</head>
+
+<body>
+
+<div id="wrapper">
+
+	<header id="head-home">
+		<ul class="nav-links">
+			<a href="/">
+				<li id="header-links" class="link-buttons">Home</li>
+			</a>
+			<a href="/opentickets">
+				<li id="header-links" class="link-buttons">View Tickets</li>
+			</a>
+			<a href="/teams">
+				<li id="header-links" class="link-buttons">View Teams</li>
+			</a>
+			<a href="/admin_data">
+				<li id="header-links" class="link-buttons">Admin</li>
+			</a>
+			<a href="/logout">
+			<li id="header-links"class="link-buttons">Log Out</li>
+			</a>
+		</ul>
+	</header>
+
+
+  <h1 style="margin: 40px;"><u>All Registered Users</u></h1>
+
+
+       {% for user in users %}
+
+        <p class="info">UserID :<b> {{ user.user_id }} </b></p>
+        <p class="info">Username :<b> {{ user.username }} </b></p>
+        <p class="info">Name :<b> {{ user.name }} </b></p>
+        <p class="info">Email:<b> {{ user.email }} </b></p>
+        <p class="info">Job Title :<b> {{ user.jobTitle }} </b></p>
+        <p>Assigned to Team ID: <b>{{ user.team_id }}</b></p>
+        <p class="info">Password :<b> {{ user.password }} </b></p>
+        <p class="info">Date Created :<b> {{ user.dateCreated }} </b></p>
+        <p class="info">Tasks Complete :<b> {{ user.tasksComplete }} </b></p>
+     <a href="/deluser/{{user.user_id}}"><button type="button" name="delUserButton" >Delete User</button></a><br>
+
+
+            <hr>
+            <br>
+    {% endfor %}
+
+
+ <h1 style="margin: 40px;"><u>All Registered Teams</u></h1>
+
+     {% for team in teams %}
+
+        <p class="info">Team ID :<b> {{ team.team_id }} </b></p>
+        <p class="info">Team Name :<b> {{ team.team_name }}</b></p>
+        <p>Team category: {{team.team_category}}</p>
+
+            <hr>
+            <br>
+    {% endfor %}
+
+</div>
+<footer>
+	<p>John Murphy | &copy; 2022</p>
+
+</footer>
+
+
+
+</body>
+</html>

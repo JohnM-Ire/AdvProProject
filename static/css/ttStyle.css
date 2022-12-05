@@ -1,0 +1,237 @@
+*{
+	margin:0;
+}
+
+html, body{
+	height: 100%;
+}
+
+/*@font-face{*/
+/*	src: url(../fonts/PTSans-Regular.ttf);*/
+/*		font-family: PTSans;*/
+
+/*}*/
+
+/*#################- HOME -#####################*/
+
+
+#wrapper{
+	float:left;
+	width: 100%;
+	min-height: 100vh;
+	padding-bottom: 60px;
+	background:#f6f7fa;
+	box-sizing: border-box;
+
+}
+
+#head-home{
+	float: left;
+	width:100%;
+	height:80px;
+}
+
+ul.nav-links{
+	float: right;
+	height: 60px;
+	margin-top: 12.5px;
+	margin-right: 10px;
+}
+
+li.link-buttons{
+	float:left;
+	line-height: 35px;
+	width:100px;
+	margin-right: 25px;
+	list-style-type: none;
+	text-align: center;
+	font-size: 18px;
+	border-radius:12px;
+	border-right-width: 4px;
+	border-left-width: 4px;
+	border-right-style: solid;
+	border-left-style: solid;
+	color: #f6f7fa;
+	border-color: #f6f7fa;
+	font-family: PTSans;
+
+}
+
+li#header-links{
+	color: #000;
+}
+a:hover li.link-buttons {
+	background:#e0f0ff;
+	border-color: #cce7ff;
+	color: rgba(50, 76, 100, 0.15);
+	color: #000;
+	}
+
+
+footer{
+	float: left;
+	width:100%;
+	height:60px;
+	font-family: PTSans;
+	background: #5f70a6;
+	text-align: center;
+	color: #fff;
+	margin-top: -60px;
+	padding-top: 15px;
+	box-sizing: border-box;
+
+}
+
+
+#home-left-outer{
+	float: left;
+	width: 60%;
+	height: auto;
+	background: #d5dae8;
+	border-radius: 30px;
+	padding-top: 20px;
+}
+.enquiry-h3{
+	font-family: PTSans;
+	font-size: 40px;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.enquiry-hr{
+	width: 40%;
+	margin: 0 auto;
+	margin-top: 3px;
+}
+
+#home-left-inner{
+	width:100%;
+	height: auto;
+	min-height:100%;
+	border-radius: 30px;
+	margin: 0 auto;
+	margin-top: 10px;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+#hometable{
+	width: 100%;
+	border: 2px solid aqua;
+	border-collapse: collapse;
+	text-align: center;
+
+}
+
+
+#tableheader{
+	background: aqua;
+}
+td{
+	/*width: 10%;*/
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+/*#tdlarge{*/
+/*	width:30%;*/
+/*	text-overflow: ellipsis;*/
+/*	white-space: nowrap;*/
+/*	overflow: hidden;*/
+/*}*/
+#home-right-outer{
+	float: left;
+	width: 40%;
+	min-height:100%;
+	text-align: center;
+	border-radius: 30px;
+	background: #f6f7fa;
+	padding-top: 20px;
+}
+
+#home-right-box_holder{
+	float: left;
+	width: 100%;
+	height: 150px;
+	margin: 0 auto;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-around;
+}
+
+.home-numbox{
+	width: 25%;
+	height: 100%;
+	background: #d5dae8;
+	border-radius: 25px;
+	text-align: center;
+	font-size: 110px;
+	box-sizing: border-box;
+}
+.home-numbox:hover{
+	border: 5px solid;
+	border-color: #d5dae8;
+	background-color: #f6f7fa;
+}
+.small_text{
+	font-size: 15px;
+	text-align: center;
+
+}
+#home-right-inner{
+	float: left;
+	border-radius: 30px;
+	width: 100%;
+	background-color: green;
+	height: auto;
+	margin: 0 auto;
+	padding-top: 30px;
+	box-sizing: border-box;
+	justify-content: center;
+}
+.home-right-rect{
+	width: 90%;
+	height: 60px;
+	margin: 0 auto;
+	background-color: red;
+	border-radius: 15px;
+	text-align: center;
+
+
+}
+#home-right-inner h4{
+	font-family: PTSans;
+	font-size: 18px;
+	margin:	30px 0px;
+
+}
+#home-right-inner p{
+	font-family: PTSans;
+	font-size: 18px;
+	margin: 10px 0px;
+}
+#home-link-holder{
+	margin-top:50px;
+
+}
+.home-link{
+	text-decoration: none;
+	color: #5f70a6;
+}
+.home-link:hover{
+	text-decoration: underline;
+
+}
+/*TEAM CHAT PAGE*/
+#teamchat_leftouter{
+	float: left;
+	width: 50%;
+	background-color: antiquewhite;
+
+
+}
+#teamchat_rightouter{
+	float: left;
+	width: 50%;
+	background-color: yellow;
+
+}

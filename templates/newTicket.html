@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/ttStyle.css') }}">
+</head>
+
+<body>
+
+<div id="wrapper">
+
+	<header id="head-home">
+		<ul class="nav-links">
+			<a href="/">
+				<li id="header-links" class="link-buttons">Home</li>
+			</a>
+			<a href="/opentickets">
+				<li id="header-links" class="link-buttons">View Tickets</li>
+			</a>
+			<a href="/teams">
+				<li id="header-links" class="link-buttons">View Teams</li>
+			</a>
+			<a href="/admin_data">
+				<li id="header-links" class="link-buttons">Admin</li>
+			</a>
+			<a href="/logout">
+			<li id="header-links"class="link-buttons">Log Out</li>
+			</a>
+		</ul>
+	</header>
+
+ <p>Create New Ticket</p><br>
+         <form id="user-form" action='' method = "POST">
+
+                <p>Ticket Description</p>
+                <label for="description"></label>
+             <textarea name = "description" rows="15" cols="50"></textarea>
+<!--                <input type = "textarea" name = "description" class="user-input"><br>-->
+
+                <p>Assign job to Team</p>
+                <select name="team_id" class="select-boxes">
+                      {% for t in teamList %}
+                      <option value={{ t.team_id }}>{{ t.team_name }}</option>
+                      {% endfor %}
+                </select>
+                <label for="team_id"></label>
+                <p>Contact Number</p>
+                <label for="contact_num"></label>
+                <input type = "text" name = "contact_num" class="user-input"><br>
+                <p>Priority</p>
+                <label for="priority"></label>
+                <select name="priority"  class="select-boxes">
+                           <option value="1">1 - Low</option>
+                           <option value="2">2 - Moderate</option>
+                           <option value="3">3 - High</option>
+                           <option value="4">4 - Critical</option>
+                </select>
+                <p>Summary </p>
+                <label for="summary"></label>
+             <textarea name = "summary" rows="5" cols="50"></textarea>
+                <p>Environment</p>
+               <label for="environment"></label>
+                       <select name="environment"  class="select-boxes">
+                           <option value="DEV">Development</option>
+                           <option value="QA">Quality Assurance</option>
+                           <option value="REL">Release</option>
+                           <option value="PROD">Production</option>
+                           <option value="Other">Other</option>
+                       </select>
+
+                <p>Special Instructions </p>
+                <label for="ticket_sp_instruction"></label>
+             <textarea name = "ticket_sp_instruction" rows="10" cols="50"></textarea><br>
+
+<!--                <p>Assign job to :</p>-->
+<!--                <select name="assigned_to" class="select-boxes">-->
+<!--                      {% for t in teamList %}-->
+<!--                      <option value={{ t.team_id }}>{{ t.team_name }}</option>-->
+<!--                      {% endfor %}-->
+
+
+
+             <input type = "submit" value = "Create Ticket" id="userButton">
+         </form>
+</div>
+    <footer>
+	    <p>John Murphy | &copy; 2022</p>
+
+    </footer>
+
+</body>
+
+</html>
